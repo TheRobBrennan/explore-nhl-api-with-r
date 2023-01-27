@@ -1,13 +1,12 @@
 # Intalling packages and getting set up ----
-# This is how you install packages
-# For this tutorial, we'll only use this package
-
 install.packages("tidyverse")
+install.packages("dplyr")    # The %>% is no longer natively supported by R
+install.packages("ggplot2") # Load for plotting graphs
 
-# Once packages are installed on your computer, you don't have to do it again
-# But you do have to load the package like below, for every R session
-
+# Load our libraries
 library(tidyverse)
+library(dplyr)
+library(ggplot2)
 
 # Load in our data from Github
 # (At the bottom I'll show you how I scraped this data)
@@ -18,26 +17,27 @@ library(tidyverse)
 
 # If you're using a file that's already on your computer (in the same folder as your project), you can use this code instead
 # 2023.01.23 => Modified by Rob Brennan <rob@therobbrennan.com> to use the path from the project root to this example file
+#   <- assign the result to an object
+#   option + - on the mac is the keyboard shortcut 🤓
 TUTORIAL_DATA_CSV <- sprintf("%s/examples/An Introduction to R with Hockey Data/assets/PHI_tutorial_data.csv", getwd())
-PHI_tutorial_data <- read_csv(TUTORIAL_DATA_CSV)
+PHI_tutorial_data <- read.csv(TUTORIAL_DATA_CSV) # read.csv is built-in and native to R
 
 # Exploring your data ----
+# 2501 observations of 46 variables is the R way of describing 2501 rows with 46 columns
 
 # Create a new data frame called goals and filter down to ONLY
 # observations with event_type of GOAL
 # Note the double equal sign, required when testing equality!
-
+# Note the %>% pipe to indicate that the following line is part of the same code chunk
 goals <- PHI_tutorial_data %>%
   filter(event_type == "GOAL")
 
 # Can add more conditions with and (&)
-
 goals_5v5 <- PHI_tutorial_data %>%
   filter(event_type == "GOAL" &
            game_strength_state == "5v5")
 
 # Can add more conditions with or (|)
-
 goals_special_teams <- PHI_tutorial_data %>%
   filter(event_type == "GOAL" &
            (game_strength_state == "5v4" |
@@ -45,26 +45,22 @@ goals_special_teams <- PHI_tutorial_data %>%
 
 # When you have multiple options for a condition, it becomes easier to use %in% instead
 # The c() notation just means that it's a list
-
 goals_5v5_ST <- PHI_tutorial_data %>%
   filter(event_type == "GOAL" &
            game_strength_state %in% c("5v5", "5v4", "4v5"))
 
 # The select() function can be used to drop and/or keep variables
 # This will keep only the six selected variables
-
 goals_small <- goals %>%
   select(game_id, game_date, event_type, 
          event_detail, event_team, event_player_1)
 
 # This will remove the event_description variable
-
 goals_drop <- goals %>%
   select(-c(event_description))
 
 # You can also use select() to reorder variables
 # If you wanted to pull home_score and away_score to the beginning
-
 goals <- goals %>%
   select(home_score, away_score, everything())
 
@@ -72,31 +68,26 @@ goals <- goals %>%
 # Creating a new data frame with a goal variable
 # ifelse() notation uses condition, value if true, value if false
 # Note the single equal sign because we're NOT testing for equality
-
 goal_variable <- PHI_tutorial_data %>%
   mutate(goal = ifelse(event_type == "GOAL", 1, 0))
 
 # Double check that our variable creation worked with sum
 # Now that goal is a 0/1 variable, you can use sum
 # The result will show up in the console below
-
 sum(goal_variable$goal)
 
 # Double check that our variable creation worked with count
 # This will show the frequencies of each unique value for the event_type variable
 # The result will show up in the console below
-
 count(goal_variable, event_type)
 
 # Use group_by and summarize to find total goals per game
-
 goals_by_game <- goal_variable %>%
   group_by(game_id) %>%
   summarize(total_goals = sum(goal))
 
 # Add event_team so we have total goals per game per team
 # But if you look at the resulting data frame, there are NA values
-
 goals_by_game_team <- goal_variable %>%
   group_by(game_id, event_team) %>%
   summarize(goals = sum(goal))
@@ -104,31 +95,30 @@ goals_by_game_team <- goal_variable %>%
 # Let's try that again and remove the NAs first
 # ! means "not" in R language
 # is.na() identifies the null values
-
 goals_by_game_team <- goal_variable %>%
   filter(!is.na(event_team)) %>%
   group_by(game_id, event_team) %>%
   summarize(goals = sum(goal))
 
 # Arrange by number of goals
-
 goals_by_game_team <- goals_by_game_team %>%
   arrange(desc(goals))
 
 # Making a graph----
 
 # Make a bar chart!
-
+# The code below will make a very basic bar chart of how many observations (i.e., events) 
+# took place in each event zone. The geom_bar() function indicates which type of chart we’re making, 
+# and the “aes” stands for aesthetics. There are many available options here, but here we’re 
+# just telling R that we want the event_zone variable on the x-axis. (Note that instead of the pipe %>%, ggplot2 uses a plus sign.)
 ggplot(data = PHI_tutorial_data) + 
   geom_bar(aes(x = event_zone))
 
 # Make a bar chart with some color!
-
 ggplot(data = PHI_tutorial_data) + 
   geom_bar(aes(x = event_zone, fill = event_zone))
 
 # Add a label to the y-axis
-
 ggplot(data = PHI_tutorial_data) + 
   geom_bar(aes(x = event_zone, fill = event_zone)) +
   labs(y = "Number of Events")
@@ -201,7 +191,6 @@ indiv_corsi <- PHI_tutorial_data %>%
 
 
 # The top_n() function will show the top 5 in shot attempts only (though we have to ungroup first)
-
 indiv_corsi_top5 <- indiv_corsi %>%
   ungroup() %>%
   top_n(5, shot_attempts)
@@ -209,14 +198,12 @@ indiv_corsi_top5 <- indiv_corsi %>%
 # Create a horizontal bar chart by using coord_flip
 # The stat = "identity" part is necessary if you're creating a bar chart that has both x and y
 # variables and *isn't* just frequency, like the one in our tutorial above
-
 ggplot(data = indiv_corsi_top5) + 
   geom_bar(aes(x = event_player_1, y = shot_attempts), stat = "identity") +
   labs(y = "Number of Shot Attempts", x = "Player") +
   coord_flip()
 
 # If you want to sort the player names by shot attempts, do this
-
 ggplot(data = indiv_corsi_top5) + 
   geom_bar(aes(x = reorder(event_player_1, shot_attempts), y = shot_attempts), stat = "identity") +
   labs(y = "Number of Shot Attempts", x = "Player") +
@@ -232,7 +219,6 @@ ggplot(data = indiv_corsi_top5) +
 # By examining the data, you can see that the player who DREW the penalty is event_player_2
 # We could also use group_by() and summarize() but it's often easier to use count() if it's a simple request
 # The sort = TRUE argument will sort in descending order
-
 penl <- PHI_tutorial_data %>%
   filter(event_type == "PENL" & !is.na(event_player_2)) %>%
   count(event_player_2, sort = TRUE)
@@ -248,7 +234,6 @@ penl <- PHI_tutorial_data %>%
 # Group by game and summarize the number of faceoff wins as well as
 # the number of total faceoffs (which is just the total number of rows in the data frame)
 # And then calculate the win percentage
-
 faceoffs <- PHI_tutorial_data %>%
   filter(event_type == "FAC") %>%
   mutate(PHI_FO_win = ifelse(event_team == "PHI", 1, 0)) %>%
@@ -257,31 +242,33 @@ faceoffs <- PHI_tutorial_data %>%
             FO_total = n()) %>%
   mutate(FO_win_perc = FO_wins / FO_total)
 
-# How to scrape game data with the EW scraper----
-
-# Load the necessary packages and source the scraper (this will load all the necessary functions)
-
-library(RCurl)
-library(xml2)
-library(rvest)
-library(jsonlite) 
-library(foreach)
-library(lubridate)
-library(tidyverse)
-source('https://raw.githubusercontent.com/evolvingwild/evolving-hockey/master/EH_scrape_functions.R')
-
-# Create a vector with the game ids used in this data
-
-games_vec <- c("2019020336","2019020349","2019020367","2019020384")
-
-# Scrape games
-
-pbp_scrape <- sc.scrape_pbp(games = games_vec)
-
-# Save the data to our data frame
-
-PHI_tutorial_data <- pbp_scrape$pbp_base
-
-# This will save the csv to your computer (in the same directory as your project)
-
-write_excel_csv(PHI_tutorial_data, "PHI_tutorial_data.csv")
+# 2023.01.23 => Modified by Rob Brennan <rob@therobbrennan.com> - This may serve as an interesting point of reference, but
+#               I have already created a way to load data from the NHL API directly in a previous example
+# # How to scrape game data with the EW scraper----
+# 
+# # Load the necessary packages and source the scraper (this will load all the necessary functions)
+# 
+# library(RCurl)
+# library(xml2)
+# library(rvest)
+# library(jsonlite) 
+# library(foreach)
+# library(lubridate)
+# library(tidyverse)
+# source('https://raw.githubusercontent.com/evolvingwild/evolving-hockey/master/EH_scrape_functions.R')
+# 
+# # Create a vector with the game ids used in this data
+# 
+# games_vec <- c("2019020336","2019020349","2019020367","2019020384")
+# 
+# # Scrape games
+# 
+# pbp_scrape <- sc.scrape_pbp(games = games_vec)
+# 
+# # Save the data to our data frame
+# 
+# PHI_tutorial_data <- pbp_scrape$pbp_base
+# 
+# # This will save the csv to your computer (in the same directory as your project)
+# 
+# write_excel_csv(PHI_tutorial_data, "PHI_tutorial_data.csv")
