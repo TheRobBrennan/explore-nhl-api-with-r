@@ -1,7 +1,5 @@
 {
 	"name": "Posit RStudio (rocker/rstudio)",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "rocker/rstudio:latest-daily",
 	"dockerComposeFile": "${localWorkspaceFolder}/docker/rstudio/docker-compose.yml",
 	"service": "rstudio",
 	"mounts": [
