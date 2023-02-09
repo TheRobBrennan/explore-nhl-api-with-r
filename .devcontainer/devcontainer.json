@@ -1,33 +1,11 @@
 {
 	"name": "Posit RStudio (rocker/rstudio)",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "rocker/rstudio:latest-daily",
-	"containerEnv": {
-		"DISABLE_AUTH": "true",
-		// "USER": "rstudio",
-		// "PASSWORD": "rstudio",
-		"TZ": "America/Los_Angeles"
-	},
-	"remoteEnv": {
-		"DISABLE_AUTH": "true",
-		// "USER": "rstudio",
-		// "PASSWORD": "rstudio",
-		"TZ": "America/Los_Angeles"
-	},
+	// "image": "rocker/rstudio:latest-daily",
+	"dockerComposeFile": "${localWorkspaceFolder}/docker/rstudio/docker-compose.yml",
+	"service": "rstudio",
 	"mounts": [
 		"source=${localWorkspaceFolder}/examples,target=/home/rstudio/examples,type=bind,consistency=cached"
 	],
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-		8787
-	],
-	"postStartCommand": "rstudio-server start"
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "R -q -e 'renv::install()'",
-	// Configure tool-specific properties.
-	// "customizations": {},
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"workspaceFolder": "/home/rstudio/examples"
 }
