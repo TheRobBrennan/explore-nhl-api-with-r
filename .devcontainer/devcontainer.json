@@ -15,7 +15,5 @@
 		}
 	},
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "R -q -e 'renv::install()'",
-	// "postCreateCommand": "R -e 'install.packages(c(\"package1\", \"package2\"))'"
-	"postCreateCommand": "R -e 'install.packages(\"languageserver\")'"
+	"postCreateCommand": "sh scripts/setup.sh"
 }
