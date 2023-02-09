@@ -18,10 +18,14 @@ library(tidyverse)
 library(ggforce)
 # library(patchwork) # Useful to concatenate multiple plots into one image
 
-
 # Read in our RDS file
 REGULAR_SEASON_RDS_FILE <- "gamefeeds_regular_2017.rds"
-REGULAR_SEASON_RDS_PATH <- sprintf("%s/NHL API - Exploring and plotting positional ice hockey data on goals penalties and more from R with the nhlapi package/assets/%s", getwd(), REGULAR_SEASON_RDS_FILE)
+
+# Update the path as desired
+REGULAR_SEASON_RDS_PATH <- sprintf("%s/examples/NHL API - Exploring and plotting positional ice hockey data on goals penalties and more from R with the nhlapi package/assets/%s", getwd(), REGULAR_SEASON_RDS_FILE)
+# REGULAR_SEASON_RDS_PATH <- sprintf("%s/NHL API - Exploring and plotting positional ice hockey data on goals penalties and more from R with the nhlapi package/assets/%s", getwd(), REGULAR_SEASON_RDS_FILE)
+
+# Load all the games from our RDS file
 gameFeeds = readRDS(REGULAR_SEASON_RDS_PATH)
 
 # -- BEGIN RINK SETUP --
