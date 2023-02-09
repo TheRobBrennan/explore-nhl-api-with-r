@@ -13,4 +13,4 @@ services:
     ports:
       - 8787:8787
     volumes:
-      - ./examples:/home/rstudio/examples
+      - ./examples:/home/rstudio/examples/

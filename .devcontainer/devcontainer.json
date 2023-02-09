@@ -5,5 +5,15 @@
 	"mounts": [
 		"source=${localWorkspaceFolder}/examples,target=/home/rstudio/examples,type=bind,consistency=cached"
 	],
-	"workspaceFolder": "/home/rstudio/examples"
+	"workspaceFolder": "/home/rstudio/examples/",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"REditorSupport.r",
+				"RDebugger.r-debugger"
+			]
+		}
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "sh scripts/setup.sh"
 }
