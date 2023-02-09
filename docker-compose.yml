@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  rstudio:
+    # Shoutout to Rich Pauloo for helping unblock me trying to get Posit RStudio to run on Apple Silicon - https://www.richpauloo.com/post/docker-rstudio/
+    image: rocker/rstudio:latest-daily
+    container_name: rstudio
+    environment:
+      - DISABLE_AUTH=true
+    ports:
+      - 8787:8787
+    volumes:
+      - ./examples:/home/rstudio/examples
