@@ -1,0 +1,9 @@
+{
+	"name": "Posit RStudio (rocker/rstudio)",
+	"dockerComposeFile": "${localWorkspaceFolder}/docker/rstudio/docker-compose.yml",
+	"service": "rstudio",
+	"mounts": [
+		"source=${localWorkspaceFolder}/examples,target=/home/rstudio/examples,type=bind,consistency=cached"
+	],
+	"workspaceFolder": "/home/rstudio/examples"
+}
