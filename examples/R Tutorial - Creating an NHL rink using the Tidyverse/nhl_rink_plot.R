@@ -146,5 +146,5 @@ nhl_rink_plot <- function() {
     coord_fixed()
 }
 
-nhl_rink_plot()
+# nhl_rink_plot()
 # theme_void() # include this for a blank plot, but likely easier to include in ggplot2 function in main code to control layering
