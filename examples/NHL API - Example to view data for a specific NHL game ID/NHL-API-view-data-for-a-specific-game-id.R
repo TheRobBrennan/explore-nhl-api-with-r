@@ -6,8 +6,8 @@ install.packages("jsonlite")
 library(httr)
 library(jsonlite)
 
-# 2023.02.09 => SEA @ NJD - https://www.nhl.com/gamecenter/sea-vs-njd/2023/02/09/2022020824#game=2022020824,game_state=live
-NHL_GAME_ID <- 2022020824
+# 2023.02.10 => SEA @ NYR - https://www.nhl.com/gamecenter/sea-vs-nyr/2023/02/10/2022020828
+NHL_GAME_ID <- 2022020828
 
 # Build the URL to load our live game data
 NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"

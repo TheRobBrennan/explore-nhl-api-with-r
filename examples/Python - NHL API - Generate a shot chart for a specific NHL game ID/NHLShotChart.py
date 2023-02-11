@@ -3,6 +3,7 @@
 import arrow
 import json
 import matplotlib.pyplot as plt
+import os
 import requests
 
 from datetime import datetime as dt
@@ -29,15 +30,17 @@ GOAL_MARKER_SIZE = 20
 GOAL_MARKER_TYPE = '*'
 
 SHOT_ON_GOAL_COLOR = "#f0a911"
-SHOT_ON_GOAL_MARKER_SIZE = 7
+SHOT_ON_GOAL_MARKER_SIZE = 10
+# See https://www.w3schools.com/python/matplotlib_markers.asp
 SHOT_ON_GOAL_MARKER_TYPE = 'o'
 
 SHOT_ATTEMPT_COLOR = "#000000"
-SHOT_ATTEMPT_MARKER_SIZE = 7
+SHOT_ATTEMPT_MARKER_SIZE = 12
 SHOT_ATTEMPT_MARKER_TYPE = 'x'
 
 OUTPUT_SEPARATOR = "\n\n*****\n\n"
-OUTPUT_SHOT_CHART_DIRECTORY_AND_FILENAME_PREFIX = './images/shot-chart-'
+OUTPUT_SHOT_CHART_DIRECTORY_AND_FILENAME_PREFIX = os.getcwd(
+) + '/examples/Python - NHL API - Generate a shot chart for a specific NHL game ID/images/shot-chart-'
 
 # Date and time
 START_DATE = "2023-01-19"
@@ -52,11 +55,12 @@ NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 NHL_SEASON = 20222023
 NHL_TEAM_ID_SEATTLE_KRAKEN = 55
 
-# 2023.02.09 => SEA @ NJD - https://www.nhl.com/gamecenter/sea-vs-njd/2023/02/09/2022020824#game=2022020824,game_state=live
-NHL_GAME_ID = 2022020824
-
+# 2023.02.10 => SEA @ NYR - https://www.nhl.com/gamecenter/sea-vs-nyr/2023/02/10/2022020828
+NHL_GAME_ID = 2022020828
 
 # Utility method to convert an API datetime string to a local format
+
+
 def convertToLocalDateTimeString(dateTimeString):
     # Convert '2023-01-20T03:00:00Z' to '2023-01-19 7:00pm'
     return arrow.get(dt.strptime(
