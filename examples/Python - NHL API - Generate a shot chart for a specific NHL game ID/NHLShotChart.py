@@ -45,7 +45,7 @@ OUTPUT_SHOT_CHART_DIRECTORY_AND_FILENAME_PREFIX = os.getcwd(
 # Date and time
 START_DATE = "2023-01-19"
 END_DATE = "2023-01-21"
-LOCAL_DATE_TIME_FORMAT_STRING = "YYYY-MM-DD h:mma"  # '2023-01-19 7:00pm'
+LOCAL_DATE_TIME_FORMAT_STRING = "YYYY-MM-DD h:mma ZZZ"  # '2023-01-19 7:00pm PST'
 
 # NHL API
 NHL_API_BASE_URL = "https://statsapi.web.nhl.com/api/v1"
@@ -58,11 +58,10 @@ NHL_TEAM_ID_SEATTLE_KRAKEN = 55
 # 2023.02.12 => SEA @ PHI - https://www.nhl.com/gamecenter/sea-vs-phi/2023/02/12/2022020848#game=2022020848,game_state=live
 NHL_GAME_ID = 2022020848
 
-# Utility method to convert an API datetime string to a local format
-
 
 def convertToLocalDateTimeString(dateTimeString):
-    # Convert '2023-01-20T03:00:00Z' to '2023-01-19 7:00pm'
+    # Convert '2023-01-20T03:00:00Z' to '2023-01-19 7:00pm PST'
+    # See https://arrow.readthedocs.io/en/latest/guide.html#supported-tokens
     return arrow.get(dt.strptime(
         dateTimeString, NHL_API_DATE_TIME_FORMAT_STRING)).to('local').format(LOCAL_DATE_TIME_FORMAT_STRING)
 
