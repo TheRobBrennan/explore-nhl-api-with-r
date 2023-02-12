@@ -143,3 +143,37 @@ example_5_json <- fromJSON(example_5_text) # Parse JSON
 example_5_dataframe <- as.data.frame(example_5_json$GC$Gamesummary$meta)
 
 # ==============================================================================
+
+# ==============================================================================
+# Additional functionality to incorporate - inspired by the hockeytech Node.js 
+# module at https://github.com/jonathas/hockeytech/blob/develop/index.js
+# ==============================================================================
+# getDailySchedule
+# getGamesPerDay
+# getRoster
+# getScorebar
+# getPlayerProfileBio
+# getPlayerProfileMedia
+# getPlayerProfileStatsBySeason
+# getPlayerProfileGameByGameStats
+# getPlayerProfileCurrentSeasonStats
+# getSeasonList
+# getTeamsBySeason
+# getSeasonSchedule
+# getStandingTypes
+# getStandings
+# getLeadersSkaters
+# getLeadersGoalies
+# getTopSkaters
+# getTopGoalies
+# getSkatersByTeam
+# getGoaliesByTeam
+# getStreaks
+# getTransactions
+# getPlayoff
+# searchPerson
+# getGamePreview
+# getGamePlayByPlay
+# getGameClock
+# getGameSummary
+# ==============================================================================
