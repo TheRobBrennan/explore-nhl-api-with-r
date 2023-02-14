@@ -23,8 +23,8 @@ HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR <- "scorebar"
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD <- 3
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 0
 
-# 2023.02.11 => SEA @ POR - https://whl.ca/gamecentre/1019157
-HOCKEYTECH_GAME_ID <- 1019157
+# 2023.02.14 => SEA @ TC - https://whl.ca/gamecentre/1019165/preview
+HOCKEYTECH_GAME_ID <- 1019165
 
 # ==============================================================================
 # Example 1 - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
@@ -145,7 +145,7 @@ example_5_dataframe <- as.data.frame(example_5_json$GC$Gamesummary$meta)
 # ==============================================================================
 
 # ==============================================================================
-# Additional functionality to incorporate - inspired by the hockeytech Node.js 
+# Additional functionality to incorporate - inspired by the hockeytech Node.js
 # module at https://github.com/jonathas/hockeytech/blob/develop/index.js
 # ==============================================================================
 # getDailySchedule
