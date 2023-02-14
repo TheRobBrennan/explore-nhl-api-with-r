@@ -55,8 +55,8 @@ NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 NHL_SEASON = 20222023
 NHL_TEAM_ID_SEATTLE_KRAKEN = 55
 
-# 2023.02.12 => SEA @ PHI - https://www.nhl.com/gamecenter/sea-vs-phi/2023/02/12/2022020848#game=2022020848,game_state=live
-NHL_GAME_ID = 2022020848
+# 2023.02.14 => SEA @ WPG - https://www.nhl.com/gamecenter/sea-vs-wpg/2023/02/14/2022020860
+NHL_GAME_ID = 2022020860
 
 
 def convertToLocalDateTimeString(dateTimeString):
