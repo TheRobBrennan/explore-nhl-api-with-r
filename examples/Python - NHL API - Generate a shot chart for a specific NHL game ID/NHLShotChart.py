@@ -200,9 +200,11 @@ def parse_game_details(gameId):
     home_shot_attempts = 0
     home_sog = 0
     home_goals = 0
+    home_shootout_goals = 0
     away_shot_attempts = 0
     away_sog = 0
     away_goals = 0
+    away_shootout_goals = 0
 
     # --------------------------------------------------------------------------------------------------------
     # Load data for a specific game ID from the NHL API
@@ -415,28 +417,40 @@ def parse_game_details(gameId):
 
         # Increment the appropriate counters
         if isHomeTeam:
-            if isShotAttempt:
+            if isShotAttempt and event["about"]["periodType"] != 'SHOOTOUT':
                 home_shot_attempts += 1
 
-            if isGoal:
+            if isGoal and event["about"]["periodType"] != 'SHOOTOUT':
                 home_goals += 1
+            elif isGoal:
+                isShotOnGoal = False
+                home_shootout_goals += 1
 
-            if isShotOnGoal:
+            if isShotOnGoal and event["about"]["periodType"] != 'SHOOTOUT':
                 home_sog += 1
         else:
-            if isShotAttempt:
-                away_shot_attempts += 1
+            if event["about"]["periodType"] != 'SHOOTOUT':
+                if isShotAttempt and event["about"]["periodType"] != 'SHOOTOUT':
+                    away_shot_attempts += 1
 
-            if isGoal:
-                away_goals += 1
-
-            if isShotOnGoal:
-                away_sog += 1
+                if isGoal and event["about"]["periodType"] != 'SHOOTOUT':
+                    away_goals += 1
+                if isShotOnGoal and event["about"]["periodType"] != 'SHOOTOUT':
+                    away_sog += 1
+            elif isGoal and event["about"]["periodType"] == 'SHOOTOUT':
+                isShotOnGoal = False
+                away_shootout_goals += 1
 
         # Reset our booleans
         isShotAttempt = False
         isShotOnGoal = False
         isGoal = False
+
+    # Add +1 goal to whomever has the most shootout goals
+    if home_shootout_goals > away_shootout_goals:
+        home_goals += 1
+    elif away_shootout_goals > home_shootout_goals:
+        away_goals += 1
 
     # Add away and home team information to our response
     # Away team stats and information
