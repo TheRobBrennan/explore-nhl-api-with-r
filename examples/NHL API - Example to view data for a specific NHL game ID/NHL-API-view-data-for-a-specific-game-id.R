@@ -1,6 +1,6 @@
 # Installing the packages
-install.packages("httr")
-install.packages("jsonlite")
+# install.packages("httr")
+# install.packages("jsonlite")
 
 # Loading packages
 library(httr)
