@@ -483,6 +483,9 @@ def parse_game_details(gameId):
 # content = load_live_data_for_game(NHL_GAME_ID)
 # ------------------------------------------------------------------------------------------------
 
-
-# Generate our shot chart (using the original example code as a reference)
-generate_shot_chart_for_game(NHL_GAME_ID)
+try:
+    # Generate our shot chart (using the original example code as a reference)
+    generate_shot_chart_for_game(NHL_GAME_ID)
+except:
+    print('\nWelp, that didn\'t work as expected. We are unable to generate a shot chart for the NHL_GAME_ID ' +
+          str(NHL_GAME_ID) + '. Did it start yet?\n')
