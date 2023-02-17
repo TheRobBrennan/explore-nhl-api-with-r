@@ -6,8 +6,8 @@
 library(httr)
 library(jsonlite)
 
-# 2023.02.14 => SEA @ WPG - https://www.nhl.com/gamecenter/sea-vs-wpg/2023/02/14/2022020860
-NHL_GAME_ID <- 2022020860
+# 2023.02.16 => PHI @ SEA - https://www.nhl.com/gamecenter/phi-vs-sea/2023/02/16/2022020876
+NHL_GAME_ID <- 2022020876
 
 # Build the URL to load our live game data
 NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
