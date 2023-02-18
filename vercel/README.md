@@ -28,3 +28,7 @@ The obligatory "Hello, world!" example is available [here](./hello-world/README.
 ### Dice Roll
 
 This example was originally presented in the [Using Vercel to host a Python API.](https://www.frontend-devops.com/blog/python-on-vercel) blog post and is available [here](./dice-roll/README.md).
+
+### Hello, Matplot
+
+The example at [](./hello-matplot/README.md) demonstrates how [Matplot](https://matplotlib.org) can be used to return an image from a [Python](https://www.python.org) API endpoint hosted on [Vercel](https://vercel.com).
