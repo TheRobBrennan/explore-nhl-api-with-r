@@ -24,3 +24,7 @@ Assuming you already have an account on [Vercel](https://vercel.com), follow the
 ### Hello, world!
 
 The obligatory "Hello, world!" example is available [here](./hello-world/README.md).
+
+### Dice Roll
+
+This example was originally presented in the [Using Vercel to host a Python API.](https://www.frontend-devops.com/blog/python-on-vercel) blog post and is available [here](./dice-roll/README.md).
