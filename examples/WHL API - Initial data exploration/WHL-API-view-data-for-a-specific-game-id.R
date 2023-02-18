@@ -1,10 +1,14 @@
 # Installing the packages
 # install.packages("httr")
 # install.packages("jsonlite")
+# install.packages("dplyr")    # The %>% is no longer natively supported by 
+# install.packages("tibble")
 
 # Loading packages
 library(httr)
 library(jsonlite)
+library(dplyr)
+library(tibble)
 
 # Build the URL to load our live game data from HockeyTech
 HOCKEYTECH_API_PUBLIC_KEY <- "41b145a848f4bd67"
@@ -23,8 +27,8 @@ HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR <- "scorebar"
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD <- 3
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 0
 
-# 2023.02.14 => SEA @ TC - https://whl.ca/gamecentre/1019165/preview
-HOCKEYTECH_GAME_ID <- 1019165
+# 2023.02.17 => SEA @ TC - https://whl.ca/gamecentre/1019175/play_by_play
+HOCKEYTECH_GAME_ID <- 1019175
 
 # ==============================================================================
 # Example 1 - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
@@ -48,6 +52,8 @@ example_1_json <- fromJSON(example_1_text) # Parse JSON
 
 # Convert data into dataframes
 example_1_dataframe <- as.data.frame(example_1_json$SiteKit)
+example_1_dataframe_raw <- enframe(unlist(example_1_json)) # Use Tibble to generate a LONG list of all the data
+
 # ==============================================================================
 
 # ==============================================================================
@@ -71,6 +77,7 @@ example_2_json <- fromJSON(example_2_text) # Parse JSON
 
 # Convert data into dataframes
 example_2_dataframe <- as.data.frame(example_2_json$GC$Preview$current_season)
+example_2_dataframe_raw <- enframe(unlist(example_2_json)) # Use Tibble to generate a LONG list of all the data
 
 # ==============================================================================
 
@@ -95,6 +102,7 @@ example_3_json <- fromJSON(example_3_text) # Parse JSON
 
 # Convert data into dataframes
 example_3_dataframe <- as.data.frame(example_3_json$GC$Pxpverbose)
+example_3_dataframe_raw <- enframe(unlist(example_3_json)) # Use Tibble to generate a LONG list of all the data
 
 # ==============================================================================
 
@@ -118,6 +126,7 @@ example_4_json <- fromJSON(example_4_text) # Parse JSON
 
 # Convert data into dataframes
 example_4_dataframe <- as.data.frame(example_4_json$GC$Clock)
+example_4_dataframe_raw <- enframe(unlist(example_4_json)) # Use Tibble to generate a LONG list of all the data
 
 # ==============================================================================
 
@@ -137,10 +146,19 @@ EXPLORE_5_URL <- sprintf(
 # Load data from the API
 example_5_details <- GET(url = EXPLORE_5_URL)
 example_5_text <- content(example_5_details, "text", encoding = "UTF-8") # Convert response
-example_5_json <- fromJSON(example_5_text) # Parse JSON
+example_5_json <- fromJSON(EXPLORE_5_URL) # Parse JSON
 
 # Convert data into dataframes
 example_5_dataframe <- as.data.frame(example_5_json$GC$Gamesummary$meta)
+example_5_dataframe_raw <- enframe(unlist(example_5_json)) # Use Tibble to generate a LONG list of all the data
+
+# You can also use select() to create a dataframe with a subset of variables
+filtered_example_5_dataframe <- example_5_dataframe %>%
+  select(visiting_goal_count, home_goal_count, period, game_clock)
+
+# Let's grab some data
+shots_by_period <- as.data.frame(example_5_json$GC$Gamesummary$shotsByPeriod)
+total_shots <- as.data.frame(example_5_json$GC$Gamesummary$totalShots)
 
 # ==============================================================================
 
