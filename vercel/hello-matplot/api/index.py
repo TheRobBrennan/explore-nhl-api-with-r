@@ -7,7 +7,6 @@ import base64
 
 class handler(BaseHTTPRequestHandler):
     def generate_image(self):
-
         # Generate the figure **without using pyplot**.
         fig = Figure()
         ax = fig.subplots()

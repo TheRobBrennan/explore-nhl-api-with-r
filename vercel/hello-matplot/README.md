@@ -66,4 +66,6 @@ Vercel CLI 28.16.2
 📝  To deploy to production (hello-matplot.vercel.app), run `vercel --prod`
 ```
 
-In the example output above, I can open []() in my favorite browser - and automatically be directed to []() as expected.
+In the example output above, I ~~can~~ should be able to open [https://hello-matplot-therobbrennan.vercel.app/](https://hello-matplot-therobbrennan.vercel.app/) in my favorite browser - and automatically be directed to [https://hello-matplot-therobbrennan.vercel.app/api](https://hello-matplot-therobbrennan.vercel.app/api) as expected...
+
+...except, this serverless function crashes when deployed to Vercel. 🤔
