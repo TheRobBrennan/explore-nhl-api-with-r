@@ -18,3 +18,9 @@ Assuming you already have an account on [Vercel](https://vercel.com), follow the
 ```sh
 % vercel login myemail@mail.com
 ```
+
+## Examples
+
+### Hello, world!
+
+The obligatory "Hello, world!" example is available [here](./hello-world/README.md).
