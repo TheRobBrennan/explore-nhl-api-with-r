@@ -156,8 +156,8 @@ def generate_shot_chart_for_game(gameId):
         '.png'  # Example - ./images/shot-chart-2022020711-2023-01-17_6:00pm-SEA-vs-EDM.png
     plt.savefig(saveToFile)
 
-    # Display chart
-    plt.show()
+    # OPTIONAL: Display chart before the program finishes executing
+    # plt.show()
     # --------------------------------------------------------------------------------------------------------
 
 
