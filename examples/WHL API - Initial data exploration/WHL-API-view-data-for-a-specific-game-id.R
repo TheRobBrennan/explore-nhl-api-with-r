@@ -1,7 +1,7 @@
 # Installing the packages
 # install.packages("httr")
 # install.packages("jsonlite")
-# install.packages("dplyr")    # The %>% is no longer natively supported by 
+# install.packages("dplyr")    # The %>% is no longer natively supported by
 # install.packages("tibble")
 
 # Loading packages
@@ -31,9 +31,9 @@ HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 0
 HOCKEYTECH_GAME_ID <- 1019195
 
 # ==============================================================================
-# Example 1 - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
+# WHL Scorebar - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
 # ==============================================================================
-EXPLORE_1_URL <- sprintf(
+WHL_SCOREBAR_URL <- sprintf(
   "%s&key=%s&site_id=%d&client_code=%s&lang=%s&view=%s&numberofdaysahead=%s&numberofdaysback=%s&league_code=&fmt=json",
   HOCKEYTECH_BASE_API_URL_MODULE_KIT,
   HOCKEYTECH_API_PUBLIC_KEY,
@@ -46,13 +46,13 @@ EXPLORE_1_URL <- sprintf(
 )
 
 # Load data from the API
-example_1_details <- GET(url = EXPLORE_1_URL)
-example_1_text <- content(example_1_details, "text", encoding = "UTF-8") # Convert response
-example_1_json <- fromJSON(example_1_text) # Parse JSON
+whl_scorebar_details <- GET(url = WHL_SCOREBAR_URL)
+whl_scorebar_text <- content(whl_scorebar_details, "text", encoding = "UTF-8") # Convert response
+whl_scorebar_json <- fromJSON(whl_scorebar_text) # Parse JSON
 
 # Convert data into dataframes
-example_1_dataframe <- as.data.frame(example_1_json$SiteKit)
-example_1_dataframe_raw <- enframe(unlist(example_1_json)) # Use Tibble to generate a LONG list of all the data
+whl_scorebar_dataframe <- as.data.frame(whl_scorebar_json$SiteKit)
+whl_scorebar_dataframe_raw <- enframe(unlist(whl_scorebar_json)) # Use Tibble to generate a LONG list of all the data
 
 # ==============================================================================
 
