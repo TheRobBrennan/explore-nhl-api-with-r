@@ -157,7 +157,7 @@ def generate_shot_chart_for_game(gameId):
     plt.savefig(saveToFile)
 
     # OPTIONAL: Display chart before the program finishes executing
-    # plt.show()
+    plt.show()
     # --------------------------------------------------------------------------------------------------------
 
 
