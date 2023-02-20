@@ -109,7 +109,7 @@ def generate_shot_chart_for_game(gameId):
         str(away_goals) + " vs. " + home_team + \
         " " + str(home_goals) + "\n" + gameStatus
     detail_line = away_team + " - " + str(away_sog) + " SOG (" + str(away_shot_attempts) + " Total Shot Attempts) " + \
-        " " + home_team + " - " + str(home_sog) + " SOG (" + \
+        "     " + home_team + " - " + str(home_sog) + " SOG (" + \
         str(home_shot_attempts) + " Total Shot Attempts)" + "\n" + \
         gameStartLocalDateTime
     # --------------------------------------------------------------------------------------------------------
