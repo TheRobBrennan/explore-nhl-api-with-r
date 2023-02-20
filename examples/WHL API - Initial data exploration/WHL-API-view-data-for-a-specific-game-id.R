@@ -30,37 +30,36 @@ HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 0
 # 2023.02.20 => SEA @ VIC - https://whl.ca/gamecentre/1019195/preview
 HOCKEYTECH_GAME_ID <- 1019195
 
-# ==============================================================================
-# WHL Scorebar - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
-# ==============================================================================
-WHL_SCOREBAR_URL <- sprintf(
-  "%s&key=%s&site_id=%d&client_code=%s&lang=%s&view=%s&numberofdaysahead=%s&numberofdaysback=%s&league_code=&fmt=json",
-  HOCKEYTECH_BASE_API_URL_MODULE_KIT,
-  HOCKEYTECH_API_PUBLIC_KEY,
-  HOCKEYTECH_SITE_ID,
-  HOCKEYTECH_CLIENT_CODE,
-  HOCKEYTECH_LANGUAGE_CODE,
-  HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR,
-  HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD,
-  HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK
-)
+# # ==============================================================================
+# # WHL Scorebar - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
+# # ==============================================================================
+# WHL_SCOREBAR_URL <- sprintf(
+#   "%s&key=%s&site_id=%d&client_code=%s&lang=%s&view=%s&numberofdaysahead=%s&numberofdaysback=%s&league_code=&fmt=json",
+#   HOCKEYTECH_BASE_API_URL_MODULE_KIT,
+#   HOCKEYTECH_API_PUBLIC_KEY,
+#   HOCKEYTECH_SITE_ID,
+#   HOCKEYTECH_CLIENT_CODE,
+#   HOCKEYTECH_LANGUAGE_CODE,
+#   HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR,
+#   HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD,
+#   HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK
+# )
+#
+# # Load data from the API
+# whl_scorebar_details <- GET(url = WHL_SCOREBAR_URL)
+# whl_scorebar_text <- content(whl_scorebar_details, "text", encoding = "UTF-8") # Convert response
+# whl_scorebar_json <- fromJSON(whl_scorebar_text) # Parse JSON
+#
+# # Convert data into dataframes
+# whl_scorebar_dataframe <- as.data.frame(whl_scorebar_json$SiteKit)
+# whl_scorebar_dataframe_raw <- enframe(unlist(whl_scorebar_json)) # Use Tibble to generate a LONG list of all the data
+#
+# # ==============================================================================
 
-# Load data from the API
-whl_scorebar_details <- GET(url = WHL_SCOREBAR_URL)
-whl_scorebar_text <- content(whl_scorebar_details, "text", encoding = "UTF-8") # Convert response
-whl_scorebar_json <- fromJSON(whl_scorebar_text) # Parse JSON
-
-# Convert data into dataframes
-whl_scorebar_dataframe <- as.data.frame(whl_scorebar_json$SiteKit)
-whl_scorebar_dataframe_raw <- enframe(unlist(whl_scorebar_json)) # Use Tibble to generate a LONG list of all the data
-
 # ==============================================================================
-
+# WHL game preview & HockeyTech configuration - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview
 # ==============================================================================
-# Example 2 - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview
-# ==============================================================================
-# HOCKEYTECH_VIEW_GAME_CENTER_TAB_PREVIEW
-EXPLORE_2_URL <- sprintf(
+WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
   HOCKEYTECH_API_PUBLIC_KEY,
@@ -71,13 +70,13 @@ EXPLORE_2_URL <- sprintf(
 )
 
 # Load data from the API
-example_2_details <- GET(url = EXPLORE_2_URL)
-example_2_text <- content(example_2_details, "text", encoding = "UTF-8") # Convert response
-example_2_json <- fromJSON(example_2_text) # Parse JSON
+whl_game_preview_and_hockeytech_configuration_details <- GET(url = WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL)
+whl_game_preview_and_hockeytech_configuration_text <- content(whl_game_preview_and_hockeytech_configuration_details, "text", encoding = "UTF-8") # Convert response
+whl_game_preview_and_hockeytech_configuration_json <- fromJSON(whl_game_preview_and_hockeytech_configuration_text) # Parse JSON
 
 # Convert data into dataframes
-example_2_dataframe <- as.data.frame(example_2_json$GC$Preview$current_season)
-example_2_dataframe_raw <- enframe(unlist(example_2_json)) # Use Tibble to generate a LONG list of all the data
+whl_and_hockeytech_configuration_dataframe_raw <- enframe(unlist(whl_game_preview_and_hockeytech_configuration_json)) # Use Tibble to generate a LONG list of all the data
+whl_game_and_hockeytech_configuration_dataframe <- as.data.frame(whl_game_preview_and_hockeytech_configuration_json$GC$Preview$current_season) # TODO - This will be great to explore in the future
 
 # ==============================================================================
 

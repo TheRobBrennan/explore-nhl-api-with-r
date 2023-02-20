@@ -10,7 +10,7 @@ Tonight's train of thought:
 - [2023.02.11 Sat - Seattle Thunderbirds at Portland Winterhawks](https://whl.ca/gamecentre/1019157)
   - What network calls are being made behind the scenes for this game?
     - WHL Scorebar - [https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json](https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json)
-    - Example 2 - [https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview](https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview)
+    - WHL game preview & HockeyTech configuration - [https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview](https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview)
     - Example 3 - [https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=pxpverbose](https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=pxpverbose)
     - Example 4 - [https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=clock](https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=clock)
     - Example 5 - [https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=gamesummary](https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=gamesummary)
@@ -25,8 +25,8 @@ Following tonight's train of thought, let's take a peek and see what data we're 
 #### WHL Scorebar
 This is our lone Module Kit example - with a reference JSON data response available for review at [](./__reference/whl_scorebar.json)
 
-#### Example 2
-This example contains a reference JSON data response available for review at [example-2.json](./__reference/example-2.json)
+#### WHL game preview & HockeyTech configuration
+This example contains a reference JSON data response available for review at [](./__reference/whl_game_preview_and_hockeytech_configuration.json)
 
 #### Example 3
 This example contains a reference JSON data response available for review at [example-3.json](./__reference/example-3.json)
