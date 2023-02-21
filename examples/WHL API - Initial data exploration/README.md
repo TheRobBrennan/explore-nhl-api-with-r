@@ -4,8 +4,6 @@ This example will explore getting started developing with the [R](https://www.r-
 
 ![](./assets/welcome.png)
 
-Shoutout to [Jonathas Ribeiro](https://github.com/jonathas) for providing an excellent example [hockeytech](https://github.com/jonathas/hockeytech/blob/develop/index.js) Node.js module on [GitHub](https://github.com/jonathas/hockeytech/blob/develop/index.js) to help shine a light on some additional possibilities for the [HockeyTech](https://www.hockeytech.com) API.
-
 ## What network calls are being made behind the scenes for a game?
 Following tonight's train of thought, let's take a peek and see what data we're working with after the conclusion of tonight's game.
 
