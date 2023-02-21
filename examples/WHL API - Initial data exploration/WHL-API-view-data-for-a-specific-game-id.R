@@ -1,7 +1,7 @@
 # Installing the packages
 # install.packages("httr")
 # install.packages("jsonlite")
-# install.packages("dplyr")    # The %>% is no longer natively supported by
+# install.packages("dplyr")    # The %>% is no longer natively supported by the R language
 # install.packages("tibble")
 
 # Loading packages
