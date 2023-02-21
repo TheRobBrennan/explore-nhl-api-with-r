@@ -56,35 +56,34 @@ HOCKEYTECH_GAME_ID <- 1019195
 #
 # # ==============================================================================
 
-# ==============================================================================
-# WHL game preview & HockeyTech configuration - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview
-# ==============================================================================
-WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL <- sprintf(
-  "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
-  HOCKEYTECH_BASE_API_URL_GAME_CENTER,
-  HOCKEYTECH_API_PUBLIC_KEY,
-  HOCKEYTECH_CLIENT_CODE,
-  HOCKEYTECH_GAME_ID,
-  HOCKEYTECH_LANGUAGE_CODE,
-  HOCKEYTECH_VIEW_GAME_CENTER_TAB_PREVIEW
-)
+# # ==============================================================================
+# # WHL game preview & HockeyTech configuration - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview
+# # ==============================================================================
+# WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL <- sprintf(
+#   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
+#   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
+#   HOCKEYTECH_API_PUBLIC_KEY,
+#   HOCKEYTECH_CLIENT_CODE,
+#   HOCKEYTECH_GAME_ID,
+#   HOCKEYTECH_LANGUAGE_CODE,
+#   HOCKEYTECH_VIEW_GAME_CENTER_TAB_PREVIEW
+# )
+#
+# # Load data from the API
+# whl_game_preview_and_hockeytech_configuration_details <- GET(url = WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL)
+# whl_game_preview_and_hockeytech_configuration_text <- content(whl_game_preview_and_hockeytech_configuration_details, "text", encoding = "UTF-8") # Convert response
+# whl_game_preview_and_hockeytech_configuration_json <- fromJSON(whl_game_preview_and_hockeytech_configuration_text) # Parse JSON
+#
+# # Convert data into dataframes
+# whl_and_hockeytech_configuration_dataframe_raw <- enframe(unlist(whl_game_preview_and_hockeytech_configuration_json)) # Use Tibble to generate a LONG list of all the data
+# whl_game_and_hockeytech_configuration_dataframe <- as.data.frame(whl_game_preview_and_hockeytech_configuration_json$GC$Preview$current_season) # TODO - This will be great to explore in the future
+#
+# # ==============================================================================
 
-# Load data from the API
-whl_game_preview_and_hockeytech_configuration_details <- GET(url = WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL)
-whl_game_preview_and_hockeytech_configuration_text <- content(whl_game_preview_and_hockeytech_configuration_details, "text", encoding = "UTF-8") # Convert response
-whl_game_preview_and_hockeytech_configuration_json <- fromJSON(whl_game_preview_and_hockeytech_configuration_text) # Parse JSON
-
-# Convert data into dataframes
-whl_and_hockeytech_configuration_dataframe_raw <- enframe(unlist(whl_game_preview_and_hockeytech_configuration_json)) # Use Tibble to generate a LONG list of all the data
-whl_game_and_hockeytech_configuration_dataframe <- as.data.frame(whl_game_preview_and_hockeytech_configuration_json$GC$Preview$current_season) # TODO - This will be great to explore in the future
-
 # ==============================================================================
-
+# WHL play-by-play - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=pxpverbose
 # ==============================================================================
-# Example 3 - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=pxpverbose
-# ==============================================================================
-# HOCKEYTECH_VIEW_GAME_CENTER_TAB_PLAY_BY_PLAY
-EXPLORE_3_URL <- sprintf(
+WHL_PLAY_BY_PLAY_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
   HOCKEYTECH_API_PUBLIC_KEY,
@@ -95,13 +94,13 @@ EXPLORE_3_URL <- sprintf(
 )
 
 # Load data from the API
-example_3_details <- GET(url = EXPLORE_3_URL)
-example_3_text <- content(example_3_details, "text", encoding = "UTF-8") # Convert response
-example_3_json <- fromJSON(example_3_text) # Parse JSON
+whl_play_by_play_details <- GET(url = WHL_PLAY_BY_PLAY_URL)
+whl_play_by_play_text <- content(whl_play_by_play_details, "text", encoding = "UTF-8") # Convert response
+whl_play_by_play_json <- fromJSON(whl_play_by_play_text) # Parse JSON
 
 # Convert data into dataframes
-example_3_dataframe <- as.data.frame(example_3_json$GC$Pxpverbose)
-example_3_dataframe_raw <- enframe(unlist(example_3_json)) # Use Tibble to generate a LONG list of all the data
+whl_play_by_play_dataframe <- as.data.frame(whl_play_by_play_json$GC$Pxpverbose)
+whl_play_by_play_dataframe_raw <- enframe(unlist(whl_play_by_play_json)) # Use Tibble to generate a LONG list of all the data
 
 # ==============================================================================
 
