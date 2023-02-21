@@ -1,7 +1,7 @@
 # Installing the packages
 # install.packages("httr")
 # install.packages("jsonlite")
-# install.packages("dplyr")    # The %>% is no longer natively supported by 
+# install.packages("dplyr")    # The %>% is no longer natively supported by the R language
 # install.packages("tibble")
 
 # Loading packages
@@ -30,10 +30,10 @@ HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 0
 # 2023.02.20 => SEA @ VIC - https://whl.ca/gamecentre/1019195/preview
 HOCKEYTECH_GAME_ID <- 1019195
 
-# ==============================================================================
-# Example 1 - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
-# ==============================================================================
-EXPLORE_1_URL <- sprintf(
+# =============================================================================
+# WHL Scorebar - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
+# =============================================================================
+WHL_SCOREBAR_URL <- sprintf(
   "%s&key=%s&site_id=%d&client_code=%s&lang=%s&view=%s&numberofdaysahead=%s&numberofdaysback=%s&league_code=&fmt=json",
   HOCKEYTECH_BASE_API_URL_MODULE_KIT,
   HOCKEYTECH_API_PUBLIC_KEY,
@@ -46,21 +46,19 @@ EXPLORE_1_URL <- sprintf(
 )
 
 # Load data from the API
-example_1_details <- GET(url = EXPLORE_1_URL)
-example_1_text <- content(example_1_details, "text", encoding = "UTF-8") # Convert response
-example_1_json <- fromJSON(example_1_text) # Parse JSON
+whl_scorebar_details <- GET(url = WHL_SCOREBAR_URL)
+whl_scorebar_text <- content(whl_scorebar_details, "text", encoding = "UTF-8") # Convert response
+whl_scorebar_json <- fromJSON(whl_scorebar_text) # Parse JSON
 
 # Convert data into dataframes
-example_1_dataframe <- as.data.frame(example_1_json$SiteKit)
-example_1_dataframe_raw <- enframe(unlist(example_1_json)) # Use Tibble to generate a LONG list of all the data
+whl_scorebar_dataframe <- as.data.frame(whl_scorebar_json$SiteKit)
+whl_scorebar_dataframe_raw <- enframe(unlist(whl_scorebar_json)) # Use Tibble to generate a LONG list of all the data
+# =============================================================================
 
-# ==============================================================================
-
-# ==============================================================================
-# Example 2 - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview
-# ==============================================================================
-# HOCKEYTECH_VIEW_GAME_CENTER_TAB_PREVIEW
-EXPLORE_2_URL <- sprintf(
+# =============================================================================
+# WHL game preview & HockeyTech configuration - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview
+# =============================================================================
+WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
   HOCKEYTECH_API_PUBLIC_KEY,
@@ -71,21 +69,19 @@ EXPLORE_2_URL <- sprintf(
 )
 
 # Load data from the API
-example_2_details <- GET(url = EXPLORE_2_URL)
-example_2_text <- content(example_2_details, "text", encoding = "UTF-8") # Convert response
-example_2_json <- fromJSON(example_2_text) # Parse JSON
+whl_game_preview_and_hockeytech_configuration_details <- GET(url = WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL)
+whl_game_preview_and_hockeytech_configuration_text <- content(whl_game_preview_and_hockeytech_configuration_details, "text", encoding = "UTF-8") # Convert response
+whl_game_preview_and_hockeytech_configuration_json <- fromJSON(whl_game_preview_and_hockeytech_configuration_text) # Parse JSON
 
 # Convert data into dataframes
-example_2_dataframe <- as.data.frame(example_2_json$GC$Preview$current_season)
-example_2_dataframe_raw <- enframe(unlist(example_2_json)) # Use Tibble to generate a LONG list of all the data
+whl_game_and_hockeytech_configuration_dataframe_raw <- enframe(unlist(whl_game_preview_and_hockeytech_configuration_json)) # Use Tibble to generate a LONG list of all the data
+whl_game_and_hockeytech_configuration_dataframe <- as.data.frame(whl_game_preview_and_hockeytech_configuration_json$GC$Preview$current_season) # TODO - This will be great to explore in the future
+# =============================================================================
 
-# ==============================================================================
-
-# ==============================================================================
-# Example 3 - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=pxpverbose
-# ==============================================================================
-# HOCKEYTECH_VIEW_GAME_CENTER_TAB_PLAY_BY_PLAY
-EXPLORE_3_URL <- sprintf(
+# =============================================================================
+# WHL play-by-play - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=pxpverbose
+# =============================================================================
+WHL_PLAY_BY_PLAY_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
   HOCKEYTECH_API_PUBLIC_KEY,
@@ -96,21 +92,19 @@ EXPLORE_3_URL <- sprintf(
 )
 
 # Load data from the API
-example_3_details <- GET(url = EXPLORE_3_URL)
-example_3_text <- content(example_3_details, "text", encoding = "UTF-8") # Convert response
-example_3_json <- fromJSON(example_3_text) # Parse JSON
+whl_play_by_play_details <- GET(url = WHL_PLAY_BY_PLAY_URL)
+whl_play_by_play_text <- content(whl_play_by_play_details, "text", encoding = "UTF-8") # Convert response
+whl_play_by_play_json <- fromJSON(whl_play_by_play_text) # Parse JSON
 
 # Convert data into dataframes
-example_3_dataframe <- as.data.frame(example_3_json$GC$Pxpverbose)
-example_3_dataframe_raw <- enframe(unlist(example_3_json)) # Use Tibble to generate a LONG list of all the data
+whl_play_by_play_dataframe <- as.data.frame(whl_play_by_play_json$GC$Pxpverbose)
+whl_play_by_play_dataframe_raw <- enframe(unlist(whl_play_by_play_json)) # Use Tibble to generate a LONG list of all the data
+# =============================================================================
 
-# ==============================================================================
-
-# ==============================================================================
-# Example 4 - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=clock
-# ==============================================================================
-# HOCKEYTECH_VIEW_GAME_CENTER_TAB_CLOCK
-EXPLORE_4_URL <- sprintf(
+# =============================================================================
+# WHL game center clock and quick links - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=clock
+# =============================================================================
+WHL_GAME_CENTER_CLOCK_AND_QUICK_LINKS_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
   HOCKEYTECH_API_PUBLIC_KEY, HOCKEYTECH_CLIENT_CODE,
@@ -120,21 +114,19 @@ EXPLORE_4_URL <- sprintf(
 )
 
 # Load data from the API
-example_4_details <- GET(url = EXPLORE_4_URL)
-example_4_text <- content(example_4_details, "text", encoding = "UTF-8") # Convert response
-example_4_json <- fromJSON(example_4_text) # Parse JSON
+whl_game_center_clock_and_quick_links_details <- GET(url = WHL_GAME_CENTER_CLOCK_AND_QUICK_LINKS_URL)
+whl_game_center_clock_and_quick_links_text <- content(whl_game_center_clock_and_quick_links_details, "text", encoding = "UTF-8") # Convert response
+whl_game_center_clock_and_quick_links_json <- fromJSON(whl_game_center_clock_and_quick_links_text) # Parse JSON
 
 # Convert data into dataframes
-example_4_dataframe <- as.data.frame(example_4_json$GC$Clock)
-example_4_dataframe_raw <- enframe(unlist(example_4_json)) # Use Tibble to generate a LONG list of all the data
+whl_game_center_clock_and_quick_links_dataframe <- as.data.frame(whl_game_center_clock_and_quick_links_json$GC$Clock)
+whl_game_center_clock_and_quick_links_dataframe_raw <- enframe(unlist(whl_game_center_clock_and_quick_links_json)) # Use Tibble to generate a LONG list of all the data
+# =============================================================================
 
-# ==============================================================================
-
-# ==============================================================================
-# Example 5 - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=gamesummary
-# ==============================================================================
-# HOCKEYTECH_VIEW_GAME_CENTER_TAB_GAME_SUMMARY
-EXPLORE_5_URL <- sprintf(
+# =============================================================================
+# WHL game summary - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=gamesummary
+# =============================================================================
+WHL_GAME_SUMMARY_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
   HOCKEYTECH_API_PUBLIC_KEY, HOCKEYTECH_CLIENT_CODE,
@@ -144,23 +136,22 @@ EXPLORE_5_URL <- sprintf(
 )
 
 # Load data from the API
-example_5_details <- GET(url = EXPLORE_5_URL)
-example_5_text <- content(example_5_details, "text", encoding = "UTF-8") # Convert response
-example_5_json <- fromJSON(EXPLORE_5_URL) # Parse JSON
+whl_game_summary_details <- GET(url = WHL_GAME_SUMMARY_URL)
+whl_game_summary_text <- content(whl_game_summary_details, "text", encoding = "UTF-8") # Convert response
+whl_game_summary_json <- fromJSON(WHL_GAME_SUMMARY_URL) # Parse JSON
 
 # Convert data into dataframes
-example_5_dataframe <- as.data.frame(example_5_json$GC$Gamesummary$meta)
-example_5_dataframe_raw <- enframe(unlist(example_5_json)) # Use Tibble to generate a LONG list of all the data
+whl_game_summary_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$meta)
+whl_game_summary_dataframe_raw <- enframe(unlist(whl_game_summary_json)) # Use Tibble to generate a LONG list of all the data
 
 # You can also use select() to create a dataframe with a subset of variables
-filtered_example_5_dataframe <- example_5_dataframe %>%
+whl_game_summary_dataframe_filtered <- whl_game_summary_dataframe %>%
   select(visiting_goal_count, home_goal_count, period, game_clock)
 
 # Let's grab some data
-shots_by_period <- as.data.frame(example_5_json$GC$Gamesummary$shotsByPeriod)
-total_shots <- as.data.frame(example_5_json$GC$Gamesummary$totalShots)
-
-# ==============================================================================
+whl_game_summary_shots_by_period_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$shotsByPeriod)
+whl_game_summary_total_shots_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$totalShots)
+# =============================================================================
 
 # ==============================================================================
 # Additional functionality to incorporate - inspired by the hockeytech Node.js
