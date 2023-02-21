@@ -18,8 +18,8 @@ This example contains a reference JSON data response for review [here](./__refer
 ### WHL play-by-play
 This example contains a reference JSON data response for review [here](./__reference/whl_play_by_play.json)
 
-### Example 4
-This example contains a reference JSON data response for review [here](./__reference/example-4.json)
+### WHL game center clock and quick links
+This example contains a reference JSON data response for review [here](./__reference/whl_game_center_clock_and_quick_links.json)
 
 ### Example 5
-This example contains a reference JSON data response for review [here](./__reference/example-5.json)
+This example contains a reference JSON data response for review [here]()
