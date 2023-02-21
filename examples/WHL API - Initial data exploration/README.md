@@ -21,5 +21,5 @@ This example contains a reference JSON data response for review [here](./__refer
 ### WHL game center clock and quick links
 This example contains a reference JSON data response for review [here](./__reference/whl_game_center_clock_and_quick_links.json)
 
-### Example 5
-This example contains a reference JSON data response for review [here]()
+### WHL game summary
+This example contains a reference JSON data response for review [here](./__reference/whl_game_summary.json)

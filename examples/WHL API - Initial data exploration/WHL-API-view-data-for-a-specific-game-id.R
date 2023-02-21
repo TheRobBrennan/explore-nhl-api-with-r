@@ -104,34 +104,34 @@ HOCKEYTECH_GAME_ID <- 1019195
 #
 # # ==============================================================================
 
-# ==============================================================================
-# WHL game center clock and quick links - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=clock
-# ==============================================================================
-WHL_GAME_CENTER_CLOCK_AND_QUICK_LINKS_URL <- sprintf(
-  "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
-  HOCKEYTECH_BASE_API_URL_GAME_CENTER,
-  HOCKEYTECH_API_PUBLIC_KEY, HOCKEYTECH_CLIENT_CODE,
-  HOCKEYTECH_GAME_ID,
-  HOCKEYTECH_LANGUAGE_CODE,
-  HOCKEYTECH_VIEW_GAME_CENTER_TAB_CLOCK
-)
+# # ==============================================================================
+# # WHL game center clock and quick links - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=clock
+# # ==============================================================================
+# WHL_GAME_CENTER_CLOCK_AND_QUICK_LINKS_URL <- sprintf(
+#   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
+#   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
+#   HOCKEYTECH_API_PUBLIC_KEY, HOCKEYTECH_CLIENT_CODE,
+#   HOCKEYTECH_GAME_ID,
+#   HOCKEYTECH_LANGUAGE_CODE,
+#   HOCKEYTECH_VIEW_GAME_CENTER_TAB_CLOCK
+# )
+#
+# # Load data from the API
+# whl_game_center_clock_and_quick_links_details <- GET(url = WHL_GAME_CENTER_CLOCK_AND_QUICK_LINKS_URL)
+# whl_game_center_clock_and_quick_links_text <- content(whl_game_center_clock_and_quick_links_details, "text", encoding = "UTF-8") # Convert response
+# whl_game_center_clock_and_quick_links_json <- fromJSON(whl_game_center_clock_and_quick_links_text) # Parse JSON
+#
+# # Convert data into dataframes
+# whl_game_center_clock_and_quick_links_dataframe <- as.data.frame(whl_game_center_clock_and_quick_links_json$GC$Clock)
+# whl_game_center_clock_and_quick_links_dataframe_raw <- enframe(unlist(whl_game_center_clock_and_quick_links_json)) # Use Tibble to generate a LONG list of all the data
+#
+# # ==============================================================================
 
-# Load data from the API
-whl_game_center_clock_and_quick_links_details <- GET(url = WHL_GAME_CENTER_CLOCK_AND_QUICK_LINKS_URL)
-whl_game_center_clock_and_quick_links_text <- content(whl_game_center_clock_and_quick_links_details, "text", encoding = "UTF-8") # Convert response
-whl_game_center_clock_and_quick_links_json <- fromJSON(whl_game_center_clock_and_quick_links_text) # Parse JSON
-
-# Convert data into dataframes
-whl_game_center_clock_and_quick_links_dataframe <- as.data.frame(whl_game_center_clock_and_quick_links_json$GC$Clock)
-whl_game_center_clock_and_quick_links_dataframe_raw <- enframe(unlist(whl_game_center_clock_and_quick_links_json)) # Use Tibble to generate a LONG list of all the data
-
 # ==============================================================================
-
-# ==============================================================================
-# Example 5 - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=gamesummary
+# WHL game summary - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=gamesummary
 # ==============================================================================
 # HOCKEYTECH_VIEW_GAME_CENTER_TAB_GAME_SUMMARY
-EXPLORE_5_URL <- sprintf(
+WHL_GAME_SUMMARY_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
   HOCKEYTECH_BASE_API_URL_GAME_CENTER,
   HOCKEYTECH_API_PUBLIC_KEY, HOCKEYTECH_CLIENT_CODE,
@@ -141,21 +141,21 @@ EXPLORE_5_URL <- sprintf(
 )
 
 # Load data from the API
-example_5_details <- GET(url = EXPLORE_5_URL)
-example_5_text <- content(example_5_details, "text", encoding = "UTF-8") # Convert response
-example_5_json <- fromJSON(EXPLORE_5_URL) # Parse JSON
+whl_game_summary_details <- GET(url = WHL_GAME_SUMMARY_URL)
+whl_game_summary_text <- content(whl_game_summary_details, "text", encoding = "UTF-8") # Convert response
+whl_game_summary_json <- fromJSON(WHL_GAME_SUMMARY_URL) # Parse JSON
 
 # Convert data into dataframes
-example_5_dataframe <- as.data.frame(example_5_json$GC$Gamesummary$meta)
-example_5_dataframe_raw <- enframe(unlist(example_5_json)) # Use Tibble to generate a LONG list of all the data
+whl_game_summary_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$meta)
+whl_game_summary_dataframe_raw <- enframe(unlist(whl_game_summary_json)) # Use Tibble to generate a LONG list of all the data
 
 # You can also use select() to create a dataframe with a subset of variables
-filtered_example_5_dataframe <- example_5_dataframe %>%
+filtered_whl_game_summary_dataframe <- whl_game_summary_dataframe %>%
   select(visiting_goal_count, home_goal_count, period, game_clock)
 
 # Let's grab some data
-shots_by_period <- as.data.frame(example_5_json$GC$Gamesummary$shotsByPeriod)
-total_shots <- as.data.frame(example_5_json$GC$Gamesummary$totalShots)
+shots_by_period_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$shotsByPeriod)
+total_shots_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$totalShots)
 
 # ==============================================================================
 
