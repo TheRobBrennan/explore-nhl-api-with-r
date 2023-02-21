@@ -56,7 +56,7 @@ whl_scorebar_dataframe_raw <- enframe(unlist(whl_scorebar_json)) # Use Tibble to
 # =============================================================================
 
 # =============================================================================
-# WHL game preview & HockeyTech configuration - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=preview
+# WHL game preview & HockeyTech configuration - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019195&lang_code=en&fmt=json&tab=preview
 # =============================================================================
 WHL_GAME_PREVIEW_AND_HOCKEYTECH_CONFIGURATION_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
@@ -79,7 +79,7 @@ whl_game_and_hockeytech_configuration_dataframe <- as.data.frame(whl_game_previe
 # =============================================================================
 
 # =============================================================================
-# WHL play-by-play - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=pxpverbose
+# WHL play-by-play - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019195&lang_code=en&fmt=json&tab=pxpverbose
 # =============================================================================
 WHL_PLAY_BY_PLAY_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
@@ -102,7 +102,7 @@ whl_play_by_play_dataframe_raw <- enframe(unlist(whl_play_by_play_json)) # Use T
 # =============================================================================
 
 # =============================================================================
-# WHL game center clock and quick links - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=clock
+# WHL game center clock and quick links - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019195&lang_code=en&fmt=json&tab=clock
 # =============================================================================
 WHL_GAME_CENTER_CLOCK_AND_QUICK_LINKS_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
@@ -124,7 +124,7 @@ whl_game_center_clock_and_quick_links_dataframe_raw <- enframe(unlist(whl_game_c
 # =============================================================================
 
 # =============================================================================
-# WHL game summary - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019157&lang_code=en&fmt=json&tab=gamesummary
+# WHL game summary - https://cluster.leaguestat.com/feed/index.php?feed=gc&key=41b145a848f4bd67&client_code=whl&game_id=1019195&lang_code=en&fmt=json&tab=gamesummary
 # =============================================================================
 WHL_GAME_SUMMARY_URL <- sprintf(
   "%s&key=%s&client_code=%s&game_id=%d&lang_code=%s&fmt=json&tab=%s",
