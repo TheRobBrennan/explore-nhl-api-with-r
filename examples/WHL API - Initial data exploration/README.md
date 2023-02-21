@@ -4,11 +4,11 @@ This example will explore getting started developing with the [R](https://www.r-
 
 ![](./assets/welcome.png)
 
-## What network calls are being made behind the scenes for a game?
+## What network calls are made behind the scenes for a game?
 Following tonight's train of thought, let's take a peek and see what data we're working with after the conclusion of tonight's game.
 
 ### WHL Scorebar
-This is our lone Module Kit example - with a reference JSON data response for review [here](./__reference/whl_scorebar.json)
+The WHL Scorebar is our lone Module Kit example - with a reference JSON data response for review [here](./__reference/whl_scorebar.json)
 
 ### WHL game preview & HockeyTech configuration
 This example contains a reference JSON data response for review [here](./__reference/whl_game_preview_and_hockeytech_configuration.json)
