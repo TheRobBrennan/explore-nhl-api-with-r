@@ -74,7 +74,7 @@ whl_game_preview_and_hockeytech_configuration_text <- content(whl_game_preview_a
 whl_game_preview_and_hockeytech_configuration_json <- fromJSON(whl_game_preview_and_hockeytech_configuration_text) # Parse JSON
 
 # Convert data into dataframes
-whl_and_hockeytech_configuration_dataframe_raw <- enframe(unlist(whl_game_preview_and_hockeytech_configuration_json)) # Use Tibble to generate a LONG list of all the data
+whl_game_and_hockeytech_configuration_dataframe_raw <- enframe(unlist(whl_game_preview_and_hockeytech_configuration_json)) # Use Tibble to generate a LONG list of all the data
 whl_game_and_hockeytech_configuration_dataframe <- as.data.frame(whl_game_preview_and_hockeytech_configuration_json$GC$Preview$current_season) # TODO - This will be great to explore in the future
 # =============================================================================
 
@@ -145,12 +145,12 @@ whl_game_summary_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary
 whl_game_summary_dataframe_raw <- enframe(unlist(whl_game_summary_json)) # Use Tibble to generate a LONG list of all the data
 
 # You can also use select() to create a dataframe with a subset of variables
-filtered_whl_game_summary_dataframe <- whl_game_summary_dataframe %>%
+whl_game_summary_dataframe_filtered <- whl_game_summary_dataframe %>%
   select(visiting_goal_count, home_goal_count, period, game_clock)
 
 # Let's grab some data
-shots_by_period_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$shotsByPeriod)
-total_shots_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$totalShots)
+whl_game_summary_shots_by_period_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$shotsByPeriod)
+whl_game_summary_total_shots_dataframe <- as.data.frame(whl_game_summary_json$GC$Gamesummary$totalShots)
 # =============================================================================
 
 # ==============================================================================
