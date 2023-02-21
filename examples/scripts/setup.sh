@@ -4,6 +4,9 @@ sudo apt update
 sudo apt install python3-pip --yes
 pip3 --version
 
+# Install Python virtual environment
+sudo apt install python3.10-venv --yes
+
 # Install Radian - A 21st Century R console - https://github.com/randy3k/radian - https://pypi.org/project/radian/
 echo Installing Radian...
 pip3 install -U radian
