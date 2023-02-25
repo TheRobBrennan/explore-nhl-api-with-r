@@ -15,20 +15,22 @@ NHL_LIVE_GAME_URL <- sprintf("%s/game/%d/feed/live", NHL_BASE_API_URL, NHL_GAME_
 
 # Call our API to load the game_details
 game_details <- GET(url = NHL_LIVE_GAME_URL)
-game_text <- content(game_details, "text", encoding = "UTF-8") # Convert response
-game_json <- fromJSON(game_text) # Parse JSON
+game_details_text <- content(game_details, "text", encoding = "UTF-8") # Convert response
+game_details_json <- fromJSON(game_details_text) # Parse JSON
 
 # Convert data into dataframes
-gameData_dataframe <- as.data.frame(game_json$gameData) # Game data
-metaData_dataframe <- as.data.frame(game_json$metaData) # Meta data
-allPlays_dataframe <- as.data.frame(game_json$liveData$plays$allPlays) # All plays for the game
-linescore_dataframe <- as.data.frame(game_json$liveData$linescore) # Line score
-decisions_dataframe <- as.data.frame(game_json$liveData$decisions) # Decisions
 
 # Away team
-awayteam_dataframe <- as.data.frame(game_json$liveData$boxscore$teams$away$team) # Team name, short code
-awayteamStats_dataframe <- as.data.frame(game_json$liveData$boxscore$teams$away$teamStats) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
+try(awayteam_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$away$team), silent = TRUE) # Team name, short code
+try(awayteamStats_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$away$teamStats), silent = TRUE) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
 
 # Home team
-hometeam_dataframe <- as.data.frame(game_json$liveData$boxscore$teams$home$team) # Team name, short code
-hometeamStats_dataframe <- as.data.frame(game_json$liveData$boxscore$teams$home$teamStats) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
+try(hometeam_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$home$team), silent = TRUE) # Team name, short code
+try(hometeamStats_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$home$teamStats), silent = TRUE) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
+
+# Game data will error out here if we are looking at a scheduled game.
+# All other data frame examples work just fine for scheduled or live/completed games.
+try(gameData_dataframe <- as.data.frame(game_details_json$gameData), silent = TRUE)
+try(allPlays_dataframe <- as.data.frame(game_details_json$liveData$plays$allPlays), silent = TRUE) # All plays for the game
+try(linescore_dataframe <- as.data.frame(game_details_json$liveData$linescore), silent = TRUE) # Line score
+try(decisions_dataframe <- as.data.frame(game_details_json$liveData$decisions), silent = TRUE) # Decisions
