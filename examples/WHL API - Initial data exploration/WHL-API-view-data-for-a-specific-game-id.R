@@ -27,8 +27,8 @@ HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR <- "scorebar"
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD <- 3
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 0
 
-# 2023.02.24 => TC @ SEA - https://whl.ca/gamecentre/1019209/preview
-HOCKEYTECH_GAME_ID <- 1019209
+# 2023.02.25 => POR @ SEA - https://whl.ca/gamecentre/1019217/preview
+HOCKEYTECH_GAME_ID <- 1019217
 
 # =============================================================================
 # WHL Scorebar - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
