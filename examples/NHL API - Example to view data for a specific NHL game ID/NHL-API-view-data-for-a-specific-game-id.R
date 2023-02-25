@@ -14,8 +14,8 @@ NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
 NHL_LIVE_GAME_URL <- sprintf("%s/game/%d/feed/live", NHL_BASE_API_URL, NHL_GAME_ID)
 
 # Call our API to load the game_details
-game_details_GET <- GET(url = NHL_LIVE_GAME_URL)
-game_details_text <- content(game_details_GET, "text", encoding = "UTF-8") # Convert response
+game_details <- GET(url = NHL_LIVE_GAME_URL)
+game_details_text <- content(game_details, "text", encoding = "UTF-8") # Convert response
 game_details_json <- fromJSON(game_details_text) # Parse JSON
 
 # Convert data into dataframes
