@@ -25,9 +25,9 @@ HOCKEYTECH_VIEW_GAME_CENTER_TAB_PREVIEW <- "preview"
 
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR <- "scorebar"
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD <- 3
-HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 0
+HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 1
 
-# 2023.02.25 => POR @ SEA - https://whl.ca/gamecentre/1019217/preview
+# https://whl.ca/gamecentre/{HOCKEYTECH_GAME_ID}/preview
 HOCKEYTECH_GAME_ID <- 1019217
 
 # =============================================================================
@@ -53,6 +53,11 @@ whl_scorebar_json <- fromJSON(whl_scorebar_text) # Parse JSON
 # Convert data into dataframes
 whl_scorebar_dataframe <- as.data.frame(whl_scorebar_json$SiteKit)
 whl_scorebar_dataframe_raw <- enframe(unlist(whl_scorebar_json)) # Use Tibble to generate a LONG list of all the data
+
+# You can also use select() to create a dataframe with a subset of variables
+whl_scorebar_dataframe_filtered <- whl_scorebar_dataframe %>%
+  select(Scorebar.GameDate, Scorebar.GameStatusStringLong, Scorebar.ID, Scorebar.VisitorLongName, Scorebar.VisitorGoals, Scorebar.HomeLongName, Scorebar.HomeGoals, Scorebar.VisitorWins, Scorebar.VisitorRegulationLosses, Scorebar.VisitorOTLosses, Scorebar.VisitorShootoutLosses, Scorebar.HomeWins, Scorebar.HomeRegulationLosses, Scorebar.HomeOTLosses, Scorebar.HomeShootoutLosses)
+
 # =============================================================================
 
 # =============================================================================
