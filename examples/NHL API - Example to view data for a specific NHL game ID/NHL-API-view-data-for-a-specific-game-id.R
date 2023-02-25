@@ -45,7 +45,7 @@ schedule_details_games_dataframe_filtered <- schedule_details_games_dataframe %>
   select(gamePk, gameDate, status, teams, linescore) %>%
   unnest(status) %>%
   unnest(teams) %>%
-  select(gamePk, gameDate, abstractGameState, detailedState, linescore, everything())
+  select(gamePk, gameDate, abstractGameState, detailedState, everything())
 
 nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
   unnest(away, names_sep = ".") %>%
@@ -53,7 +53,12 @@ nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
   unnest(home, names_sep = ".") %>%
   unnest(home.team, names_sep = ".") %>%
   unnest(linescore, names_sep = ".") %>%
-  select(linescore.currentPeriodOrdinal, linescore.currentPeriodTimeRemaining, away.team.name, away.score, home.team.name, home.score, gamePk, gameDate, everything())
+  select(linescore.currentPeriodOrdinal, 
+         linescore.currentPeriodTimeRemaining, 
+         away.team.name, away.score,
+         home.team.name, home.score, 
+         gamePk, gameDate,
+         linescore.teams)
 
 # OPTIONAL: Convert our filtered data frame to JSON
 # schedule_details_games_dataframe_filtered_toJSON <- toJSON(schedule_details_games_dataframe_filtered, pretty = TRUE)
