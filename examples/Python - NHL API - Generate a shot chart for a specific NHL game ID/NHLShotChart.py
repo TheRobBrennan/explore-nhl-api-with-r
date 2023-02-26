@@ -43,8 +43,6 @@ OUTPUT_SHOT_CHART_DIRECTORY_AND_FILENAME_PREFIX = os.getcwd(
 ) + '/examples/Python - NHL API - Generate a shot chart for a specific NHL game ID/images/shot-chart-'
 
 # Date and time
-START_DATE = "2023-01-19"
-END_DATE = "2023-01-21"
 LOCAL_DATE_TIME_FORMAT_STRING = "YYYY-MM-DD h:mma ZZZ"  # '2023-01-19 7:00pm PST'
 
 # NHL API
@@ -52,11 +50,8 @@ NHL_API_BASE_URL = "https://statsapi.web.nhl.com/api/v1"
 NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 
 # NHL settings and configuration
-NHL_SEASON = 20222023
-NHL_TEAM_ID_SEATTLE_KRAKEN = 55
-
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID = 2022020946
+NHL_GAME_ID = 2022020943
 
 
 def convertToLocalDateTimeString(dateTimeString):
@@ -168,32 +163,6 @@ def load_live_data_for_game(gameId):
         "/game/" + str(gameId) + "/feed/live"
     live_data = requests.get(NHL_API_LIVE_GAME_DATA_URL).json()
     return live_data
-
-
-# Load schedule data for a specific season and team ID from the NHL API
-def load_schedule_for_season_and_team(season, teamId):
-    # Build our schedule URL using team information from above
-    NHL_API_SCHEDULE_URL = NHL_API_BASE_URL + \
-        "/schedule?season=" + str(season) + \
-        "&teamId=" + str(teamId)
-    season_schedule = requests.get(NHL_API_SCHEDULE_URL).json()
-    printJSON(season_schedule, 1)
-    return season_schedule
-
-
-# Load schedule data using a specified start and end date for a specific team ID with an optional hydrate CSV string from the NHL API
-def load_schedule_for_team_with_start_and_end_dates(teamId, startDate, endDate, hydrateCSVString=""):
-    # https://statsapi.web.nhl.com/api/v1/schedule?startDate=2023-01-19&endDate=2023-01-21&hydrate=team,linescore,metadata,seriesSummary(series)&teamId=55
-    # Build our partial schedule URL using team information from above
-    NHL_API_PARTIAL_SCHEDULE_URL = NHL_API_BASE_URL + \
-        "/schedule?" + \
-        "&startDate=" + startDate + \
-        "&endDate=" + endDate + \
-        "&teamId=" + str(teamId) + \
-        "&hydrate=" + hydrateCSVString
-    partial_schedule = requests.get(NHL_API_PARTIAL_SCHEDULE_URL).json()
-    printJSON(partial_schedule, 1)
-    return partial_schedule
 
 
 def parse_game_details(gameId):
@@ -470,23 +439,12 @@ def parse_game_details(gameId):
 
 
 # ------------------------------------------------------------------------------------------------
-# Examples
+# Generate our shot chart (using the original example code from
+# https://github.com/ztandrews/NHLShotCharts/blob/main/NHLGameShotChart.py as a reference)
 # ------------------------------------------------------------------------------------------------
-# # - Load the Seattle Kraken schedule for the 2022-23 season
-# load_schedule_for_season_and_team(NHL_SEASON, NHL_TEAM_ID_SEATTLE_KRAKEN)
-# ------------------------------------------------------------------------------------------------
-# # - Load a subset of Seattle Kraken games and hydrate our response with additional details
-# hydrateWithCSVString = "team,linescore,metadata,seriesSummary(series)"
-# load_schedule_for_team_with_start_and_end_dates(
-#     NHL_TEAM_ID_SEATTLE_KRAKEN, START_DATE, END_DATE, hydrateWithCSVString)
-# ------------------------------------------------------------------------------------------------
-# Load live data for the game held on 2023.01.19 between the New Jersey Devils and Seattle Kraken
-# content = load_live_data_for_game(NHL_GAME_ID)
-# ------------------------------------------------------------------------------------------------
-
 try:
-    # Generate our shot chart (using the original example code as a reference)
     generate_shot_chart_for_game(NHL_GAME_ID)
 except:
     print('\nWelp, that didn\'t work as expected. We are unable to generate a shot chart for the NHL_GAME_ID ' +
           str(NHL_GAME_ID) + '. Did it start yet?\n')
+# ------------------------------------------------------------------------------------------------
