@@ -328,25 +328,8 @@ def parse_game_details(gameId):
                         chartElements.append(datapoint)
 
                 except:
-                    datapoint['event_description'] = eventDescription
-                    # TODO - Do we need this?
-                    # datapoint['x'] = x
-                    # datapoint['y'] = y
-                    # datapoint['x_calculated_shot_chart'] = x_calculated_shot_chart
-                    # datapoint['y_calculated_shot_chart'] = y_calculated_shot_chart
-                    # datapoint['markertype'] = GOAL_MARKER_TYPE
-                    # datapoint['color'] = GOAL_COLOR
-                    # datapoint['markersize'] = GOAL_MARKER_SIZE
-                    # datapoint['event_details'] = eventDetails
-                    # datapoint['team'] = team
+                    print('An exception was raised processing data. Please revisit.')
 
-                    # if isHomeTeam:
-                    #     datapoint['shot_attempts'] = home_shot_attempts
-                    # else:
-                    #     datapoint['shot_attempts'] = away_shot_attempts
-
-                    # if SHOW_GOALS:
-                    #     chartElements.append(datapoint)
             elif eventDescription == "Shot":
                 # Is this a shot on goal?
                 isShotAttempt = True
