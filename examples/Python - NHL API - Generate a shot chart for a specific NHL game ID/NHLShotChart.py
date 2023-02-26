@@ -289,35 +289,25 @@ def parse_game_details(gameId):
 
             # Is this a goal?
             if eventDescription == "Goal":
-                isGoal = True
+                # Account for shootout shots and goals
+                if event["about"]["periodType"] == 'SHOOTOUT':
+                    isGoal = False
+                    isShotOnGoal = False
+                    isShotAttempt = False
+
+                    # Keep track of shootout goals separately
+                    if isHomeTeam:
+                        home_shootout_goals += 1
+                    else:
+                        away_shootout_goals += 1
+                else:
+                    isGoal = True
+                    isShotOnGoal = True
+                    # FUTURE - Should isShotAttempt be set to False here? 🤔
+                    isShotAttempt = True
 
                 try:
-                    # Shootout adjustments
-                    if event["about"]["periodType"] != 'SHOOTOUT':
-                        isShotOnGoal = True
-                        # FUTURE - Should isShotAttempt be set to False here? 🤔
-                        isShotAttempt = True
-
-                        datapoint['event_description'] = eventDescription
-                        datapoint['x'] = x
-                        datapoint['y'] = y
-                        datapoint['x_calculated_shot_chart'] = x_calculated_shot_chart
-                        datapoint['y_calculated_shot_chart'] = y_calculated_shot_chart
-                        datapoint['markertype'] = GOAL_MARKER_TYPE
-                        datapoint['color'] = GOAL_COLOR
-                        datapoint['markersize'] = GOAL_MARKER_SIZE
-                        datapoint['event_details'] = eventDetails
-                        datapoint['team'] = team
-
-                        if isHomeTeam:
-                            datapoint['shot_attempts'] = home_shot_attempts
-                        else:
-                            datapoint['shot_attempts'] = away_shot_attempts
-
-                        if SHOW_GOALS:
-                            chartElements.append(datapoint)
-
-                except:
+                    # Track our goal - shootout or otherwise
                     datapoint['event_description'] = eventDescription
                     datapoint['x'] = x
                     datapoint['y'] = y
@@ -336,6 +326,10 @@ def parse_game_details(gameId):
 
                     if SHOW_GOALS:
                         chartElements.append(datapoint)
+
+                except:
+                    print('An exception was raised processing data. Please revisit.')
+
             elif eventDescription == "Shot":
                 # Is this a shot on goal?
                 isShotAttempt = True
@@ -387,6 +381,7 @@ def parse_game_details(gameId):
 
         # Increment the appropriate counters
         if isHomeTeam:
+            # TODO - Remove unnecessary duplicate checks to make sure we're not in a shootout period
             if isShotAttempt and event["about"]["periodType"] != 'SHOOTOUT':
                 home_shot_attempts += 1
 
@@ -400,6 +395,7 @@ def parse_game_details(gameId):
                 home_sog += 1
         else:
             if event["about"]["periodType"] != 'SHOOTOUT':
+                # TODO - Remove unnecessary duplicate check to make sure we're not in a shootout period
                 if isShotAttempt and event["about"]["periodType"] != 'SHOOTOUT':
                     away_shot_attempts += 1
 
