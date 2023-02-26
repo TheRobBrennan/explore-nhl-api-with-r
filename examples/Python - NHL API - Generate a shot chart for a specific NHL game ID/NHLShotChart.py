@@ -381,7 +381,6 @@ def parse_game_details(gameId):
 
         # Increment the appropriate counters
         if isHomeTeam:
-            # TODO - Remove unnecessary duplicate checks to make sure we're not in a shootout period
             if isShotAttempt and event["about"]["periodType"] != 'SHOOTOUT':
                 home_shot_attempts += 1
 
@@ -395,7 +394,6 @@ def parse_game_details(gameId):
                 home_sog += 1
         else:
             if event["about"]["periodType"] != 'SHOOTOUT':
-                # TODO - Remove unnecessary duplicate check to make sure we're not in a shootout period
                 if isShotAttempt and event["about"]["periodType"] != 'SHOOTOUT':
                     away_shot_attempts += 1
 
