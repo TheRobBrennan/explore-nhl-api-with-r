@@ -87,26 +87,20 @@ try:
     print('\nLet\'s explore the NHL API with Python 🐍\n')
 
     # - Load the Seattle Kraken schedule for the 2022-23 season
-    print('\tLoad the Seattle Kraken schedule for the 2022-23 season...')
+    # print('\tLoad the Seattle Kraken schedule for the 2022-23 season...')
     # load_schedule_for_season_and_team(NHL_SEASON, NHL_TEAM_ID_SEATTLE_KRAKEN)
 
     # - Load a subset of Seattle Kraken games and hydrate our response with additional details
-    print('\tLoad a subset of Seattle Kraken games and hydrate our response with additional details...')
+    # print('\tLoad a subset of Seattle Kraken games and hydrate our response with additional details...')
     # hydrateWithCSVString = "team,linescore,metadata,seriesSummary(series)"
     # load_schedule_for_team_with_start_and_end_dates(
     #     NHL_TEAM_ID_SEATTLE_KRAKEN, START_DATE, END_DATE, hydrateWithCSVString)
 
     # Load live data for a specific NHL game
-    print('\tLoad live data for a specific NHL game...\n')
+    # print('\tLoad live data for a specific NHL game...\n')
     # content = load_live_data_for_game(NHL_GAME_ID)
     # printJSON(content, 1)
 
 except:
     print('\nWelp, that didn\'t work as expected.\n')
 # ------------------------------------------------------------------------------------------------
-
-# - Load a subset of Seattle Kraken games and hydrate our response with additional details
-print('\tLoad a subset of Seattle Kraken games and hydrate our response with additional details...')
-hydrateWithCSVString = "team,linescore,metadata,seriesSummary(series)"
-load_schedule_for_team_with_start_and_end_dates(
-    NHL_TEAM_ID_SEATTLE_KRAKEN, START_DATE, END_DATE, hydrateWithCSVString)
