@@ -53,12 +53,14 @@ nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
   unnest(home, names_sep = ".") %>%
   unnest(home.team, names_sep = ".") %>%
   unnest(linescore, names_sep = ".") %>%
-  select(linescore.currentPeriodOrdinal, 
-         linescore.currentPeriodTimeRemaining, 
-         away.team.name, away.score,
-         home.team.name, home.score, 
-         gamePk, gameDate,
-         linescore.teams)
+  select(
+    linescore.currentPeriodOrdinal,
+    linescore.currentPeriodTimeRemaining,
+    away.team.name, away.score,
+    home.team.name, home.score,
+    gamePk, gameDate,
+    linescore.teams
+  )
 
 # OPTIONAL: Convert our filtered data frame to JSON
 # schedule_details_games_dataframe_filtered_toJSON <- toJSON(schedule_details_games_dataframe_filtered, pretty = TRUE)
