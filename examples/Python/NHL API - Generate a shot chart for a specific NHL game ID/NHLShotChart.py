@@ -51,7 +51,7 @@ NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 
 # NHL settings and configuration
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID = 2022020984
+NHL_GAME_ID = 2022021005
 
 
 def convertToLocalDateTimeString(dateTimeString):
@@ -152,7 +152,7 @@ def generate_shot_chart_for_game(gameId):
     plt.savefig(saveToFile)
 
     # OPTIONAL: Display chart before the program finishes executing
-    # plt.show()
+    plt.show()
     # --------------------------------------------------------------------------------------------------------
 
 
