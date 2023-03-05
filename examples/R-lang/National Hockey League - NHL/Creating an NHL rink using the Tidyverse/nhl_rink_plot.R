@@ -2,8 +2,8 @@
 # Blog post - https://thewincolumn.ca/2021/01/15/r-tutorial-creating-an-nhl-rink-using-the-tidyverse/
 
 # Install packages
-install.packages("tidyverse")
-install.packages("ggforce")
+# install.packages("tidyverse")
+# install.packages("ggforce")
 
 # Use packages
 library(tidyverse)
