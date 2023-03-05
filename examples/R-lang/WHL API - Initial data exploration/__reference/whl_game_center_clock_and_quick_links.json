@@ -1,0 +1,113 @@
+{
+  "GC": {
+    "Parameters": {
+      "feed": "gc",
+      "key": "41b145a848f4bd67",
+      "client_code": "whl",
+      "game_id": "1019195",
+      "lang_code": "en",
+      "fmt": "json",
+      "tab": "clock",
+      "lang_id": 1,
+      "static": 1
+    },
+    "Clock": {
+      "period": "3",
+      "game_clock": "00:00:00",
+      "game_date_iso_8601": "2023-02-20T14:05:00-08:00",
+      "timezone": "Canada\/Pacific",
+      "timezone_short": "PST",
+      "started": "1",
+      "game_number": "592",
+      "season_id": "279",
+      "season_name": "2022 - 23 Regular Season",
+      "home_team": {
+        "name": "Victoria Royals",
+        "team_id": "227",
+        "team_code": "VIC",
+        "team_nickname": "Royals",
+        "team_city": "Victoria"
+      },
+      "visiting_team": {
+        "name": "Seattle Thunderbirds",
+        "team_id": "214",
+        "team_code": "SEA",
+        "team_nickname": "Thunderbirds",
+        "team_city": "Seattle"
+      },
+      "text_game_summary": "\/stats\/text-game-report.php?game_id=1019195",
+      "official_game_report": "\/stats\/official-game-report.php?game_id=1019195",
+      "home_audio_url": "https:\/\/www.thezone.fm\/royals\/",
+      "home_video_url": "https:\/\/watch.chl.ca\/chl_persona",
+      "home_webcast_url": "https:\/\/watch.chl.ca\/chl_persona",
+      "visiting_audio_url": "https:\/\/www.iheart.com\/live\/seattle-thunderbirds-radio-9166\/",
+      "visiting_video_url": "https:\/\/watch.chl.ca\/whl_chl",
+      "visiting_webcast_url": "https:\/\/watch.chl.ca\/whl_chl",
+      "tickets_url": "https:\/\/selectyourtickets.evenue.net\/cgi-bin\/ncommerce3\/SEGetEventInfo?ticketCode=GS%3ARGP%3AVR2223%3AVG27%3A&linkID=rgp&shopperContext=&pc=&caller=&appCode=&groupCode=VR&cgc=&dataAccId=944&locale=en_US&siteId=ev_rgp",
+      "venue": "Save-On-Foods Memorial Arena - Victoria, BC",
+      "final": "1",
+      "status": "4",
+      "home_goal_count": "0",
+      "visiting_goal_count": "7",
+      "progress": "Final",
+      "progress_short": "Final",
+      "period_name": "3rd",
+      "home_lineup_card": "\/download.php?client_code=whl&file_path=\/game_lineups\/1019195\/VIC_2023-02-20.pdf",
+      "visiting_lineup_card": "\/download.php?client_code=whl&file_path=\/game_lineups\/1019195\/SEA_2023-02-20.pdf",
+      "game_lineups": "\/download.php?client_code=whl&file_path=\/game_lineups\/1019195\/SEA@VIC_2023-02-20.pdf",
+      "updated": {
+        "clock": 1676930880,
+        "meta": 1676939696,
+        "lineup": 1676939696,
+        "goals": 1676939696,
+        "penalties": 1676939696,
+        "penaltyshots": 0,
+        "shots": 1676939696,
+        "hits": 1676939696,
+        "faceoffs": 1676939697,
+        "pxp": 1676939697,
+        "shootouts": 1676939696,
+        "h2h": 1676886819,
+        "pxpverbose": 1676939533
+      },
+      "scoring": {
+        "home": {
+          "1": "0",
+          "2": "0",
+          "3": "0"
+        },
+        "visiting": {
+          "1": "4",
+          "2": "2",
+          "3": "1"
+        }
+      },
+      "shots_on_goal": {
+        "home": {
+          "1": 9,
+          "2": 10,
+          "3": 7
+        },
+        "visiting": {
+          "1": 19,
+          "2": 13,
+          "3": 9
+        }
+      },
+      "power_play": {
+        "total": {
+          "home": "6",
+          "visiting": "6"
+        },
+        "goals": {
+          "home": "0",
+          "visiting": "1"
+        }
+      },
+      "fow": {
+        "home": 25,
+        "visiting": 35
+      }
+    }
+  }
+}
