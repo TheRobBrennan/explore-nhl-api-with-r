@@ -7,8 +7,8 @@ library(tidyverse)
 library(dplyr)
 
 # Read in .csv with sample game data
-GAME_DATA_CSV <- sprintf("%s/examples/R-lang/Exploratory Data Analysis Using Tidyverse/assets/game_data.csv", getwd())
-NATURAL_STAT_TRICK_DATA_CSV <- sprintf("%s/examples/R-lang/Exploratory Data Analysis Using Tidyverse/assets/position_data_NST.csv", getwd())
+GAME_DATA_CSV <- sprintf("%s/examples/R-lang/National Hockey League - NHL/Exploratory Data Analysis Using Tidyverse/assets/game_data.csv", getwd())
+NATURAL_STAT_TRICK_DATA_CSV <- sprintf("%s/examples/R-lang/National Hockey League - NHL/Exploratory Data Analysis Using Tidyverse/assets/position_data_NST.csv", getwd())
 
 game_data <- read.csv(GAME_DATA_CSV) # read.csv is built-in and native to R
 position_data_NST <- read.csv(NATURAL_STAT_TRICK_DATA_CSV)

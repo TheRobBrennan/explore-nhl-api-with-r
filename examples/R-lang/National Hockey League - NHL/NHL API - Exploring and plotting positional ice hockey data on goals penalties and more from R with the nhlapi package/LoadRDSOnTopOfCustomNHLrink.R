@@ -1,18 +1,38 @@
-# Source - https://github.com/mrbilltran/the-win-column/blob/master/nhl_rink_plot.R
-# Blog post - https://thewincolumn.ca/2021/01/15/r-tutorial-creating-an-nhl-rink-using-the-tidyverse/
-
 # Install packages
-install.packages("tidyverse")
-install.packages("ggforce")
+# install.packages("nhlapi")
+# install.packages("ggplot2")
+# install.packages("dplyr")    # The %>% is no longer natively supported by R
+# install.packages("tidyverse")
+# install.packages("ggforce")
+# install.packages("patchwork") # Useful to concatenate multiple plots into one
+
+# Alternatively - Install the development version from GitHub
+#  devtools::install_github("jozefhajnala/nhlapi")
+#  remotes::install_github("jozefhajnala/nhlapi")
 
 # Use packages
+library(nhlapi)
+library(ggplot2)
+library(dplyr)
 library(tidyverse)
 library(ggforce)
+# library(patchwork) # Useful to concatenate multiple plots into one image
 
+# Read in our RDS file
+REGULAR_SEASON_RDS_FILE <- "gamefeeds_regular_2017.rds"
+
+# Update the path as desired
+REGULAR_SEASON_RDS_PATH <- sprintf("%s/examples/R-lang/National Hockey League - NHL/NHL API - Exploring and plotting positional ice hockey data on goals penalties and more from R with the nhlapi package/assets/%s", getwd(), REGULAR_SEASON_RDS_FILE)
+
+# Load all the games from our RDS file
+gameFeeds <- readRDS(REGULAR_SEASON_RDS_PATH)
+
+# -- BEGIN RINK SETUP --
 # Setting up colour values
 NHL_red <- "#FFCCD8" # Use #C8102E for original red in the rules, #FFE6EB for lighter hue
 NHL_blue <- "#CCE1FF" # Use #0033A0 for original blue in the rules, #E6EFFF for lighter hue
 NHL_light_blue <- "#CCF5FF" # Use #41B6E6 for original crease blue in the rules, #E6F9FF for lighter hue
+
 
 nhl_rink_plot <- function() {
   # Plotting an NHL rink completely following the NHL rule book:
@@ -145,6 +165,82 @@ nhl_rink_plot <- function() {
     # Fixed scale for the coordinate system
     coord_fixed()
 }
-
-# nhl_rink_plot()
 # theme_void() # include this for a blank plot, but likely easier to include in ggplot2 function in main code to control layering
+# -- END RINK SETUP --
+
+# Processing and plotting positional data
+# Retrieve the data frames with plays from the data
+getPlaysDf <- function(gm) {
+  playsRes <- try(gm[[1L]][["liveData"]][["plays"]][["allPlays"]])
+  if (inherits(playsRes, "try-error")) data.frame() else playsRes
+}
+plays <- lapply(gameFeeds, getPlaysDf)
+# Bind the list into a single data frame
+plays <- nhlapi:::util_rbindlist(plays)
+# Keep only the records that have coordinates
+plays <- plays[!is.na(plays$coordinates.x), ]
+# Move the coordinates to non-negative values before plotting
+plays$coordx <- plays$coordinates.x + abs(min(plays$coordinates.x))
+plays$coordy <- plays$coordinates.y + abs(min(plays$coordinates.y))
+
+# Now we have the data ready in a plays data.frame, finally we can create some cool plots.
+# As an example, in the following chunk the popular ggplot2 package is used to plot densities and events that would yield results
+# similar to the ones shown below
+# Note the %>% pipe to indicate that the following line is part of the same code chunk
+goals <- plays %>%
+  filter(result.eventTypeId == "GOAL")
+
+# Example - Black and white visualization
+# Create the plot and add goals
+# nhlapi::nhl_plot_rink()
+# points(goals$coordinates.x, goals$coordinates.y)
+
+add_rink_to_plot <- function() {
+  list(
+    # Faceoff circles
+    geom_circle(aes(x0 = 0, y0 = 0, r = 15), colour = NHL_blue, size = 2 / 12), # Centre
+    geom_circle(aes(x0 = 69, y0 = 22, r = 15), colour = NHL_red, size = 2 / 12), # Top-Right
+    geom_circle(aes(x0 = 69, y0 = -22, r = 15), colour = NHL_red, size = 2 / 12), # Bottom-Right
+    geom_circle(aes(x0 = -69, y0 = 22, r = 15), colour = NHL_red, size = 2 / 12), # Top-Left
+    geom_circle(aes(x0 = -69, y0 = -22, r = 15), colour = NHL_red, size = 2 / 12), # Bottom-Left
+
+    # Centre line
+    geom_tile(aes(x = 0, y = 0, width = 1, height = 85), fill = NHL_red) # Centre line
+  )
+}
+
+# Example - Color visualization
+plot_with_black_dots_and_no_map <- ggplot(goals, aes(x = coordinates.x, y = coordinates.y)) +
+  labs(title = "Where are goals scored from?") +
+  geom_point(alpha = 0.1, size = 0.2) +
+  xlim(-100, 100) +
+  ylim(-42.5, 42.5) +
+  theme_void()
+
+plot_with_a_map_and_ugly_fucking_background <- ggplot(goals, aes(x = coordinates.x, y = coordinates.y)) +
+  labs(title = "Where are goals scored from?") +
+  geom_point(alpha = 0.1, size = 0.2) +
+  xlim(-100, 100) +
+  ylim(-42.5, 42.5) +
+  geom_density_2d_filled(alpha = 0.35, show.legend = FALSE) +
+  theme_void()
+
+plot_with_a_map_and_different_background <- ggplot(goals, aes(x = coordinates.x, y = coordinates.y)) +
+  labs(title = "Where are goals scored from?") +
+  geom_point(alpha = 0.1, size = 2) +
+  xlim(-100, 100) +
+  ylim(-42.5, 42.5) +
+  theme_void()
+
+# Let's create some plots
+a <- plot_with_black_dots_and_no_map + add_rink_to_plot()
+a
+
+b <- plot_with_a_map_and_ugly_fucking_background + add_rink_to_plot()
+b
+
+c <- plot_with_a_map_and_different_background + add_rink_to_plot()
+c
+
+# library(patchwork) # Useful to concatenate multiple plots into one image
+# a + b + c
