@@ -1,7 +1,7 @@
 # Intalling packages and getting set up ----
-install.packages("tidyverse")
-install.packages("dplyr") # The %>% is no longer natively supported by R
-install.packages("ggplot2") # Load for plotting graphs
+# install.packages("tidyverse")
+# install.packages("dplyr") # The %>% is no longer natively supported by R
+# install.packages("ggplot2") # Load for plotting graphs
 
 # Load our libraries
 library(tidyverse)
