@@ -1,9 +1,9 @@
 # Install packages
-install.packages("nhlapi")
-install.packages("ggplot2")
-install.packages("dplyr")    # The %>% is no longer natively supported by R
-install.packages("tidyverse")
-install.packages("ggforce")
+# install.packages("nhlapi")
+# install.packages("ggplot2")
+# install.packages("dplyr")    # The %>% is no longer natively supported by R
+# install.packages("tidyverse")
+# install.packages("ggforce")
 # install.packages("patchwork") # Useful to concatenate multiple plots into one
 
 # Alternatively - Install the development version from GitHub
