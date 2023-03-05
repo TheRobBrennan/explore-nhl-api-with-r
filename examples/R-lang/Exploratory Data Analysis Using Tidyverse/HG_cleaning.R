@@ -1,6 +1,6 @@
 # Install packages
-install.packages("tidyverse")
-install.packages("dplyr") # The %>% is no longer natively supported by R
+# install.packages("tidyverse")
+# install.packages("dplyr") # The %>% is no longer natively supported by R
 
 # Use libraries
 library(tidyverse)
