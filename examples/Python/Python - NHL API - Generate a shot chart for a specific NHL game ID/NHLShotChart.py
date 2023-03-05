@@ -40,7 +40,7 @@ SHOT_ATTEMPT_MARKER_TYPE = 'x'
 
 OUTPUT_SEPARATOR = "\n\n*****\n\n"
 OUTPUT_SHOT_CHART_DIRECTORY_AND_FILENAME_PREFIX = os.getcwd(
-) + '/examples/Python - NHL API - Generate a shot chart for a specific NHL game ID/images/shot-chart-'
+) + '/examples/Python/Python - NHL API - Generate a shot chart for a specific NHL game ID/images/shot-chart-'
 
 # Date and time
 LOCAL_DATE_TIME_FORMAT_STRING = "YYYY-MM-DD h:mma ZZZ"  # '2023-01-19 7:00pm PST'
