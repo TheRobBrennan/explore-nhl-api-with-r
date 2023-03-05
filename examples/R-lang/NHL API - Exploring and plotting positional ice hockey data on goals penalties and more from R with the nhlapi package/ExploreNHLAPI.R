@@ -1,7 +1,7 @@
 # Current CRAN version:
-install.packages("nhlapi")
-install.packages("ggplot2")
-install.packages("dplyr") # The %>% is no longer natively supported by R
+# install.packages("nhlapi")
+# install.packages("ggplot2")
+# install.packages("dplyr") # The %>% is no longer natively supported by R
 
 # Development version from GitHub
 #  devtools::install_github("jozefhajnala/nhlapi")
