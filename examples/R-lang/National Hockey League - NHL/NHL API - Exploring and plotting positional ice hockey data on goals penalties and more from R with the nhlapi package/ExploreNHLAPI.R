@@ -58,7 +58,7 @@ gameFeeds <- parallel::parLapplyLB(cl, gameIds, nhlapi::nhl_games_feed)
 parallel::stopCluster(cl)
 
 # This is a large data set (~1.4 GB for the 2017-18 season), so let's use saveRDS to store this on disk
-REGULAR_SEASON_RDS_PATH <- sprintf("%s/examples/R-lang/NHL API - Exploring and plotting positional ice hockey data on goals penalties and more from R with the nhlapi package/assets", getwd())
+REGULAR_SEASON_RDS_PATH <- sprintf("%s/examples/R-lang/National Hockey League - NHL/NHL API - Exploring and plotting positional ice hockey data on goals penalties and more from R with the nhlapi package/assets", getwd())
 saveRDS(gameFeeds, file.path(REGULAR_SEASON_RDS_PATH, "gamefeeds_regular_2017.rds")) # ~34.1 MB is the RDS file size 🤓
 
 # Processing and plotting positional data

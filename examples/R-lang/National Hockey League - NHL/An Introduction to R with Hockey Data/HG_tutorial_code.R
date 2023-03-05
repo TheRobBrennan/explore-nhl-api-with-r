@@ -19,7 +19,7 @@ library(ggplot2)
 # 2023.01.23 => Modified by Rob Brennan <rob@therobbrennan.com> to use the path from the project root to this example file
 #   <- assign the result to an object
 #   option + - on the mac is the keyboard shortcut 🤓
-TUTORIAL_DATA_CSV <- sprintf("%s/examples/R-lang/An Introduction to R with Hockey Data/assets/PHI_tutorial_data.csv", getwd())
+TUTORIAL_DATA_CSV <- sprintf("%s/examples/R-lang/National Hockey League - NHL/An Introduction to R with Hockey Data/assets/PHI_tutorial_data.csv", getwd())
 PHI_tutorial_data <- read.csv(TUTORIAL_DATA_CSV) # read.csv is built-in and native to R
 
 # Exploring your data ----
