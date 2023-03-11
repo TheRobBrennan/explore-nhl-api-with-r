@@ -51,7 +51,7 @@ NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 
 # NHL settings and configuration
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID = 2022021035
+NHL_GAME_ID = 2022021049
 
 
 def convertToLocalDateTimeString(dateTimeString):
