@@ -8,11 +8,16 @@ while (TRUE) {
   # Read in the source files
   source(NHL_SCOREBOARD_SCRIPT)
   source(WHL_SCOREBOARD_SCRIPT)
-  
-  # View the data frame
-  View(nhl_scoreboard_dataframe)
+
+  # View the data frame - focused on NHL updates
   View(whl_scorebar_dataframe_filtered)
+  View(nhl_scoreboard_dataframe)
+  
+  # View the data frame - focused on WHL updates
+  # View(nhl_scoreboard_dataframe)
+  # View(whl_scorebar_dataframe_filtered)
 
   # Wait for at least X seconds
   Sys.sleep(DELAY_IN_SECONDS)
 }
+
