@@ -13,7 +13,7 @@ library(tibble)
 library(tidyr)
 
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID <- 2022021049
+NHL_GAME_ID <- 2022021063
 
 # Build the URL to load our live game data
 NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
@@ -47,21 +47,23 @@ schedule_details_games_dataframe_filtered <- schedule_details_games_dataframe %>
   unnest(teams) %>%
   select(gamePk, gameDate, abstractGameState, detailedState, everything())
 
-try(nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
-      unnest(away, names_sep = ".") %>%
-      unnest(away.team, names_sep = ".") %>%
-      unnest(home, names_sep = ".") %>%
-      unnest(home.team, names_sep = ".") %>%
-      unnest(linescore, names_sep = ".") %>%
-      select(
-        linescore.currentPeriodOrdinal,
-        linescore.currentPeriodTimeRemaining,
-        away.team.name, away.score,
-        home.team.name, home.score,
-        gamePk, gameDate,
-        linescore.teams
-      )
-    , silent = FALSE)
+try(
+  nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
+    unnest(away, names_sep = ".") %>%
+    unnest(away.team, names_sep = ".") %>%
+    unnest(home, names_sep = ".") %>%
+    unnest(home.team, names_sep = ".") %>%
+    unnest(linescore, names_sep = ".") %>%
+    select(
+      linescore.currentPeriodOrdinal,
+      linescore.currentPeriodTimeRemaining,
+      away.team.name, away.score,
+      home.team.name, home.score,
+      gamePk, gameDate,
+      linescore.teams
+    ),
+  silent = FALSE
+)
 
 # OPTIONAL: Convert our filtered data frame to JSON
 # schedule_details_games_dataframe_filtered_toJSON <- toJSON(schedule_details_games_dataframe_filtered, pretty = TRUE)
