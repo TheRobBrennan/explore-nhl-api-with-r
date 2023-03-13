@@ -40,8 +40,8 @@ Awesome. Let's get back to our local machine and copy our files over to the `/ro
 
 ```sh
 # Make sure we're in the top level directory of our project
-% pwd
-/path/to/explore-python-api-development
+% cd app
+/path/to/explore-nhl-api-with-r-and-python/app
 
 # Use rsync to copy and deploy my local files to the remote server
 # Exclude virtual environment, cache, and other unnecessary directories
