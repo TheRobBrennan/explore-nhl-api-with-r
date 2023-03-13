@@ -14,10 +14,6 @@ while (TRUE) {
   View(whl_scorebar_dataframe_filtered)
   View(nhl_scoreboard_dataframe)
 
-  # View the data frame - focused on WHL updates
-  # View(nhl_scoreboard_dataframe)
-  # View(whl_scorebar_dataframe_filtered)
-
   # Wait for at least X seconds
   Sys.sleep(THREE_MINUTES_IN_SECONDS)
 }
