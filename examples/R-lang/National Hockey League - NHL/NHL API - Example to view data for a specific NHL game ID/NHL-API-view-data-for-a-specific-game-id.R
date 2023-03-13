@@ -47,20 +47,21 @@ schedule_details_games_dataframe_filtered <- schedule_details_games_dataframe %>
   unnest(teams) %>%
   select(gamePk, gameDate, abstractGameState, detailedState, everything())
 
-nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
-  unnest(away, names_sep = ".") %>%
-  unnest(away.team, names_sep = ".") %>%
-  unnest(home, names_sep = ".") %>%
-  unnest(home.team, names_sep = ".") %>%
-  unnest(linescore, names_sep = ".") %>%
-  select(
-    linescore.currentPeriodOrdinal,
-    linescore.currentPeriodTimeRemaining,
-    away.team.name, away.score,
-    home.team.name, home.score,
-    gamePk, gameDate,
-    linescore.teams
-  )
+try(nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
+      unnest(away, names_sep = ".") %>%
+      unnest(away.team, names_sep = ".") %>%
+      unnest(home, names_sep = ".") %>%
+      unnest(home.team, names_sep = ".") %>%
+      unnest(linescore, names_sep = ".") %>%
+      select(
+        linescore.currentPeriodOrdinal,
+        linescore.currentPeriodTimeRemaining,
+        away.team.name, away.score,
+        home.team.name, home.score,
+        gamePk, gameDate,
+        linescore.teams
+      )
+    , silent = FALSE)
 
 # OPTIONAL: Convert our filtered data frame to JSON
 # schedule_details_games_dataframe_filtered_toJSON <- toJSON(schedule_details_games_dataframe_filtered, pretty = TRUE)
