@@ -62,7 +62,7 @@ try(
       gamePk, gameDate,
       linescore.teams
     ),
-  silent = FALSE
+  silent = TRUE
 )
 
 # OPTIONAL: Convert our filtered data frame to JSON
