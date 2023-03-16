@@ -14,9 +14,23 @@ while (TRUE) {
   source(WHL_SCOREBOARD_SCRIPT)
 
   # View the data frame - focused on NHL updates
-  View(whl_scorebar_dataframe_filtered)
-  View(schedule_details_games_dataframe_filtered)
-  View(nhl_scoreboard_dataframe)
+  if (exists("whl_scorebar_dataframe_filtered")) {
+    View(whl_scorebar_dataframe_filtered)
+  } else {
+    print("The WHL scoreboard data frame does not exist.")
+  }
+
+  if (exists("schedule_details_games_dataframe_filtered")) {
+    View(schedule_details_games_dataframe_filtered)
+  } else {
+    print("The NHL schedule data frame does not exist.")
+  }
+
+  if (exists("nhl_scoreboard_dataframe")) {
+    View(nhl_scoreboard_dataframe)
+  } else {
+    print("The NHL scoreboard data frame does not exist.")
+  }
 
   # Wait for at least X seconds
   Sys.sleep(DELAY_IN_SECONDS)
