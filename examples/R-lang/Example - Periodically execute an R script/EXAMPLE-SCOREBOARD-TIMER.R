@@ -11,7 +11,7 @@ while (TRUE) {
 
   # Remove data frames before refreshing scoreboard data
   try(rm(nhl_scoreboard_dataframe), silent = TRUE)
-  try(rm(schedule_details_games_dataframe_filtered), silent = TRUE)
+  try(rm(nhl_schedule_details_games_dataframe_filtered), silent = TRUE)
   try(rm(whl_scorebar_dataframe_filtered), silent = TRUE)
 
   # Read in the source files
@@ -19,8 +19,8 @@ while (TRUE) {
   source(WHL_SCOREBOARD_SCRIPT)
 
   # View the data frame - focused on NHL updates
-  if (exists("schedule_details_games_dataframe_filtered")) {
-    View(schedule_details_games_dataframe_filtered)
+  if (exists("nhl_schedule_details_games_dataframe_filtered")) {
+    View(nhl_schedule_details_games_dataframe_filtered)
   }
 
   if (exists("whl_scorebar_dataframe_filtered")) {
