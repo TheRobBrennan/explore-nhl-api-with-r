@@ -10,21 +10,21 @@ while (TRUE) {
   print(paste("Refreshing NHL and WHL scoreboard data at", Sys.time(), "- Attempt #", EXECUTION_ATTEMPTS))
 
   # Remove data frames before refreshing scoreboard data
-  try(rm(whl_scorebar_dataframe_filtered), silent = TRUE)
-  try(rm(schedule_details_games_dataframe_filtered), silent = TRUE)
   try(rm(nhl_scoreboard_dataframe), silent = TRUE)
+  try(rm(nhl_schedule_details_games_dataframe_filtered), silent = TRUE)
+  try(rm(whl_scorebar_dataframe_filtered), silent = TRUE)
 
   # Read in the source files
   source(NHL_SCOREBOARD_SCRIPT)
   source(WHL_SCOREBOARD_SCRIPT)
 
   # View the data frame - focused on NHL updates
-  if (exists("whl_scorebar_dataframe_filtered")) {
-    View(whl_scorebar_dataframe_filtered)
+  if (exists("nhl_schedule_details_games_dataframe_filtered")) {
+    View(nhl_schedule_details_games_dataframe_filtered)
   }
 
-  if (exists("schedule_details_games_dataframe_filtered")) {
-    View(schedule_details_games_dataframe_filtered)
+  if (exists("whl_scorebar_dataframe_filtered")) {
+    View(whl_scorebar_dataframe_filtered)
   }
 
   if (exists("nhl_scoreboard_dataframe")) {

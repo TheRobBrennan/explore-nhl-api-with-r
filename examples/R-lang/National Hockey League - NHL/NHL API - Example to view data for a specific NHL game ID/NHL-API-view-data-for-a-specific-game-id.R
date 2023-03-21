@@ -30,17 +30,17 @@ NHL_SCHEDULE_URL <- sprintf(
 )
 
 # Call our API to load schedule details
-schedule_details <- GET(url = NHL_SCHEDULE_URL)
-schedule_details_text <- content(schedule_details, "text", encoding = "UTF-8") # Convert response
-schedule_details_json <- fromJSON(schedule_details_text) # Parse JSON
+nhl_schedule_details <- GET(url = NHL_SCHEDULE_URL)
+nhl_schedule_details_text <- content(nhl_schedule_details, "text", encoding = "UTF-8") # Convert response
+nhl_schedule_details_json <- fromJSON(nhl_schedule_details_text) # Parse JSON
 
 # Convert data into dataframes
-schedule_details_dataframe <- as.data.frame(schedule_details_json$dates)
+nhl_schedule_details_dataframe <- as.data.frame(nhl_schedule_details_json$dates)
 
-schedule_details_games_dataframe <- as.data.frame(schedule_details_json$dates$games)
-# schedule_details_games_dataframe_raw <- enframe(unlist(schedule_details_json$dates$games)) # Use Tibble to generate a LONG list of all the data
+nhl_schedule_details_games_dataframe <- as.data.frame(nhl_schedule_details_json$dates$games)
+# nhl_schedule_details_games_dataframe_raw <- enframe(unlist(nhl_schedule_details_json$dates$games)) # Use Tibble to generate a LONG list of all the data
 
-schedule_details_games_dataframe_filtered <- schedule_details_games_dataframe %>%
+nhl_schedule_details_games_dataframe_filtered <- nhl_schedule_details_games_dataframe %>%
   as_tibble() %>%
   select(gamePk, gameDate, status, teams, linescore) %>%
   unnest(status) %>%
@@ -48,7 +48,7 @@ schedule_details_games_dataframe_filtered <- schedule_details_games_dataframe %>
   select(gamePk, gameDate, abstractGameState, detailedState, everything())
 
 try(
-  nhl_scoreboard_dataframe <- schedule_details_games_dataframe_filtered %>%
+  nhl_scoreboard_dataframe <- nhl_schedule_details_games_dataframe_filtered %>%
     unnest(away, names_sep = ".") %>%
     unnest(away.team, names_sep = ".") %>%
     unnest(home, names_sep = ".") %>%
@@ -66,26 +66,26 @@ try(
 )
 
 # OPTIONAL: Convert our filtered data frame to JSON
-# schedule_details_games_dataframe_filtered_toJSON <- toJSON(schedule_details_games_dataframe_filtered, pretty = TRUE)
+# nhl_schedule_details_games_dataframe_filtered_toJSON <- toJSON(nhl_schedule_details_games_dataframe_filtered, pretty = TRUE)
 
 # Call our API to load the game_details
-game_details <- GET(url = NHL_LIVE_GAME_URL)
-game_details_text <- content(game_details, "text", encoding = "UTF-8") # Convert response
-game_details_json <- fromJSON(game_details_text) # Parse JSON
+nhl_game_details <- GET(url = NHL_LIVE_GAME_URL)
+nhl_game_details_text <- content(nhl_game_details, "text", encoding = "UTF-8") # Convert response
+nhl_game_details_json <- fromJSON(nhl_game_details_text) # Parse JSON
 
 # Convert data into dataframes
 
 # Away team
-try(awayteam_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$away$team), silent = TRUE) # Team name, short code
-try(awayteamStats_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$away$teamStats), silent = TRUE) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
+try(nhl_awayteam_dataframe <- as.data.frame(nhl_game_details_json$liveData$boxscore$teams$away$team), silent = TRUE) # Team name, short code
+try(nhl_awayteamStats_dataframe <- as.data.frame(nhl_game_details_json$liveData$boxscore$teams$away$teamStats), silent = TRUE) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
 
 # Home team
-try(hometeam_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$home$team), silent = TRUE) # Team name, short code
-try(hometeamStats_dataframe <- as.data.frame(game_details_json$liveData$boxscore$teams$home$teamStats), silent = TRUE) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
+try(nhl_hometeam_dataframe <- as.data.frame(nhl_game_details_json$liveData$boxscore$teams$home$team), silent = TRUE) # Team name, short code
+try(nhl_hometeamStats_dataframe <- as.data.frame(nhl_game_details_json$liveData$boxscore$teams$home$teamStats), silent = TRUE) # Summary of goals, PIM, shots, power play by the numbers, hits, blocked shots, takeaways, giveaways, etc.
 
 # Game data will error out here if we are looking at a scheduled game.
 # All other data frame examples work just fine for scheduled or live/completed games.
-try(gameData_dataframe <- as.data.frame(game_details_json$gameData), silent = TRUE)
-try(allPlays_dataframe <- as.data.frame(game_details_json$liveData$plays$allPlays), silent = TRUE) # All plays for the game
-try(linescore_dataframe <- as.data.frame(game_details_json$liveData$linescore), silent = TRUE) # Line score
-try(decisions_dataframe <- as.data.frame(game_details_json$liveData$decisions), silent = TRUE) # Decisions
+try(nhl_gameData_dataframe <- as.data.frame(nhl_game_details_json$gameData), silent = TRUE)
+try(nhl_allPlays_dataframe <- as.data.frame(nhl_game_details_json$liveData$plays$allPlays), silent = TRUE) # All plays for the game
+try(nhl_linescore_dataframe <- as.data.frame(nhl_game_details_json$liveData$linescore), silent = TRUE) # Line score
+try(nhl_decisions_dataframe <- as.data.frame(nhl_game_details_json$liveData$decisions), silent = TRUE) # Decisions
