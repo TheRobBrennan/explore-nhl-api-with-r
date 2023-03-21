@@ -21,7 +21,7 @@ while (TRUE) {
 
   # View the data frame - focused on NHL updates
   if (exists("nhl_schedule_details_games_dataframe_filtered")) {
-    print(paste(EMPTY_SPACES, "-> NHL schedule has loaded at", Sys.time()))
+    print(paste(EMPTY_SPACES, "-> NHL schedule   available at", Sys.time()))
     View(nhl_schedule_details_games_dataframe_filtered)
   }
 
