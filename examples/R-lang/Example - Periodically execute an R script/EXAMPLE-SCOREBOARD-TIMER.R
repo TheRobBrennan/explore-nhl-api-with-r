@@ -10,8 +10,8 @@ while (TRUE) {
   print(paste("Refreshing NHL and WHL scoreboard data at", Sys.time(), "- Attempt #", EXECUTION_ATTEMPTS))
 
   # Remove data frames before refreshing scoreboard data
-  try(rm(nhl_scoreboard_dataframe), silent = TRUE)
   try(rm(nhl_schedule_details_games_dataframe_filtered), silent = TRUE)
+  try(rm(nhl_scoreboard_dataframe), silent = TRUE)
   try(rm(whl_scorebar_dataframe_filtered), silent = TRUE)
 
   # Read in the source files
