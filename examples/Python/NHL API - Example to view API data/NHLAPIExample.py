@@ -22,7 +22,7 @@ NHL_SEASON = 20222023
 NHL_TEAM_ID_SEATTLE_KRAKEN = 55
 
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID = 2022021198
+NHL_GAME_ID = 2022021214
 
 
 def convertToLocalDateTimeString(dateTimeString):
