@@ -13,7 +13,7 @@ library(tibble)
 library(tidyr)
 
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID <- 2022021198
+NHL_GAME_ID <- 2022021214
 
 # Build the URL to load our live game data
 NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
