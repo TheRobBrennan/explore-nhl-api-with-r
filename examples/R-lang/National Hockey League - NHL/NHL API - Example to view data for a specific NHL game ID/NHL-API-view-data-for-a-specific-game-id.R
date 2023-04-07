@@ -44,8 +44,8 @@ try(
     # nhl_schedule_details_games_dataframe_raw <- enframe(unlist(nhl_schedule_details_json$dates$games)) # Use Tibble to generate a LONG list of all the data
 
     nhl_schedule_details_games_dataframe_filtered <- nhl_schedule_details_games_dataframe %>%
-      as_tibble()
-    select(gamePk, gameDate, status, teams, linescore) %>%
+      as_tibble() %>%
+      select(gamePk, gameDate, status, teams, linescore) %>%
       unnest(status) %>%
       unnest(teams) %>%
       select(gamePk, gameDate, abstractGameState, detailedState, everything())
