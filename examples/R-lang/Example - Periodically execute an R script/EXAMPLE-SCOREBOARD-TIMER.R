@@ -1,3 +1,17 @@
+# Installing the packages
+# install.packages("httr")
+# install.packages("jsonlite")
+# install.packages("dplyr")    # The %>% is no longer natively supported by the R language
+# install.packages("tibble")
+# install.packages("tidyr")
+
+# Loading packages
+library(httr)
+library(jsonlite)
+library(dplyr)
+library(tibble)
+library(tidyr)
+
 THREE_MINUTES_IN_SECONDS <- 60 * 3
 DELAY_IN_SECONDS <- THREE_MINUTES_IN_SECONDS
 EXECUTION_ATTEMPTS <- 1
@@ -29,18 +43,33 @@ while (TRUE) {
 
   # View the data frame - focused on NHL updates
   if (exists("nhl_schedule_details_games_dataframe_filtered")) {
-    print(paste(EMPTY_SPACES, "-> NHL schedule   available at", Sys.time()))
-    View(nhl_schedule_details_games_dataframe_filtered)
+    # Check if the data frame contains at least one row of data (fixes a bug where a day range is specified where games do NOT exist - 2023.04.07 is an example)
+    if (nrow(nhl_schedule_details_games_dataframe_filtered) > 0) {
+      print(paste(EMPTY_SPACES, "-> NHL schedule   available at", Sys.time()))
+      View(nhl_schedule_details_games_dataframe_filtered)
+    } else {
+      # print("The nhl_schedule_details_games_dataframe_filtered data frame exists, but it does not contain any data.")
+    }
   }
 
   if (exists("whl_scorebar_dataframe_filtered")) {
-    print(paste(EMPTY_SPACES, "-> WHL scoreboard available at", Sys.time()))
-    View(whl_scorebar_dataframe_filtered)
+    # Check if the data frame contains at least one row of data (fixes a bug where a day range is specified where games do NOT exist - 2023.04.07 is an example)
+    if (nrow(whl_scorebar_dataframe_filtered) > 0) {
+      print(paste(EMPTY_SPACES, "-> WHL scoreboard available at", Sys.time()))
+      View(whl_scorebar_dataframe_filtered)
+    } else {
+      # print("The whl_scorebar_dataframe_filtered data frame exists, but it does not contain any data.")
+    }
   }
 
   if (exists("nhl_scoreboard_dataframe")) {
-    print(paste(EMPTY_SPACES, "-> NHL scoreboard available at", Sys.time()))
-    View(nhl_scoreboard_dataframe)
+    # Check if the data frame contains at least one row of data (fixes a bug where a day range is specified where games do NOT exist - 2023.04.07 is an example)
+    if (nrow(nhl_scoreboard_dataframe) > 0) {
+      print(paste(EMPTY_SPACES, "-> NHL scoreboard available at", Sys.time()))
+      View(nhl_scoreboard_dataframe)
+    } else {
+      # print("The nhl_scoreboard_dataframe data frame exists, but it does not contain any data.")
+    }
   }
 
   # Wait for at least X seconds
