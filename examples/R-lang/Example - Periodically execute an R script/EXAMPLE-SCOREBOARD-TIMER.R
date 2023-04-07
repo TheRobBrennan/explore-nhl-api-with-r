@@ -1,3 +1,17 @@
+# Installing the packages
+# install.packages("httr")
+# install.packages("jsonlite")
+# install.packages("dplyr")    # The %>% is no longer natively supported by the R language
+# install.packages("tibble")
+# install.packages("tidyr")
+
+# Loading packages
+library(httr)
+library(jsonlite)
+library(dplyr)
+library(tibble)
+library(tidyr)
+
 THREE_MINUTES_IN_SECONDS <- 60 * 3
 DELAY_IN_SECONDS <- THREE_MINUTES_IN_SECONDS
 EXECUTION_ATTEMPTS <- 1
