@@ -21,7 +21,7 @@ from matplotlib.patches import PathPatch
 # Global settings - Set to False if you do not want to display certain visual elements
 SHOW_GOALS = True
 SHOW_SHOTS_ON_GOAL = True
-SHOW_SHOT_ATTEMPTS = True
+SHOW_SHOT_ATTEMPTS = False
 SHOW_SHOT_ATTEMPTS_ANNOTATION = False
 
 # Charts and graphs
@@ -51,7 +51,7 @@ NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 
 # NHL settings and configuration
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID = 2022030151
+NHL_GAME_ID = 2022030122
 
 
 def convertToLocalDateTimeString(dateTimeString):
