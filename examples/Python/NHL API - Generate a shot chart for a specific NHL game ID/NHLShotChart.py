@@ -21,7 +21,7 @@ from matplotlib.patches import PathPatch
 # Global settings - Set to False if you do not want to display certain visual elements
 SHOW_GOALS = True
 SHOW_SHOTS_ON_GOAL = True
-SHOW_SHOT_ATTEMPTS = False
+SHOW_SHOT_ATTEMPTS = True
 SHOW_SHOT_ATTEMPTS_ANNOTATION = False
 
 # Charts and graphs
