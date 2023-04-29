@@ -55,15 +55,38 @@ try(
       unnest(away.team, names_sep = ".") %>%
       unnest(home, names_sep = ".") %>%
       unnest(home.team, names_sep = ".") %>%
-      unnest(linescore, names_sep = ".") %>%
       select(
-        linescore.currentPeriodOrdinal,
-        linescore.currentPeriodTimeRemaining,
         away.team.name, away.score,
         home.team.name, home.score,
         gamePk, gameDate,
-        linescore.teams
+        linescore,
       )
+    
+    if ("linescore" %in% colnames(nhl_scoreboard_dataframe)) {
+      # print("Column linescore exists in the data frame")
+      nhl_scoreboard_dataframe <- nhl_scoreboard_dataframe %>% 
+        unnest(linescore, names_sep = ".") %>%
+        select(
+          gamePk, gameDate,
+          away.team.name, away.score,
+          home.team.name, home.score,
+          linescore.currentPeriodOrdinal,
+          linescore.currentPeriodTimeRemaining,
+        )
+    } else {
+      # print("Column linescore does not exist in the data frame")
+      nhl_scoreboard_dataframe <- nhl_scoreboard_dataframe %>%
+        mutate(currentPeriodOrdinal = 'Scheduled') %>%
+        mutate(currentPeriodTimeRemaining = 'Not started') %>%
+        select(
+          gamePk, gameDate,
+          away.team.name, away.score,
+          home.team.name, home.score,
+          currentPeriodOrdinal,
+          currentPeriodTimeRemaining,
+        )
+    }
+
 
     # OPTIONAL: Convert our filtered data frame to JSON
     # nhl_schedule_details_games_dataframe_filtered_toJSON <- toJSON(nhl_schedule_details_games_dataframe_filtered, pretty = TRUE)
