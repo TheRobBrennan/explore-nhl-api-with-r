@@ -25,16 +25,13 @@ while (TRUE) {
   print(paste("Refreshing NHL and WHL scoreboard data at", Sys.time(), "- Attempt #", EXECUTION_ATTEMPTS))
 
   # Remove data frames before refreshing scoreboard data
-  if (exists("nhl_schedule_details_games_dataframe_filtered")) {
-    try(rm(nhl_schedule_details_games_dataframe_filtered), silent = TRUE)
-  }
-
-  if (exists("nhl_scoreboard_dataframe")) {
-    try(rm(nhl_scoreboard_dataframe), silent = TRUE)
-  }
-
   if (exists("whl_scorebar_dataframe_filtered")) {
     try(rm(whl_scorebar_dataframe_filtered), silent = TRUE)
+  }
+
+  # Remove data frames before refreshing scoreboard data
+  if (exists("nhl_scoreboard_dataframe")) {
+    try(rm(nhl_scoreboard_dataframe), silent = TRUE)
   }
 
   # Read in the source files
@@ -42,16 +39,6 @@ while (TRUE) {
   source(WHL_SCOREBOARD_SCRIPT)
 
   # View the data frame - focused on NHL updates
-  if (exists("nhl_schedule_details_games_dataframe_filtered")) {
-    # Check if the data frame contains at least one row of data (fixes a bug where a day range is specified where games do NOT exist - 2023.04.07 is an example)
-    if (nrow(nhl_schedule_details_games_dataframe_filtered) > 0) {
-      print(paste(EMPTY_SPACES, "-> NHL schedule   available at", Sys.time()))
-      View(nhl_schedule_details_games_dataframe_filtered)
-    } else {
-      # print("The nhl_schedule_details_games_dataframe_filtered data frame exists, but it does not contain any data.")
-    }
-  }
-
   if (exists("whl_scorebar_dataframe_filtered")) {
     # Check if the data frame contains at least one row of data (fixes a bug where a day range is specified where games do NOT exist - 2023.04.07 is an example)
     if (nrow(whl_scorebar_dataframe_filtered) > 0) {
