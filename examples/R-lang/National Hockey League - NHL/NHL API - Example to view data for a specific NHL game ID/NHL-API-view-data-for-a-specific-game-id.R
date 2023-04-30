@@ -48,7 +48,7 @@ try(
       select(gamePk, gameDate, status, teams, linescore) %>%
       unnest(status) %>%
       unnest(teams) %>%
-      select(gamePk, gameDate, abstractGameState, detailedState, everything())
+      select(gamePk, gameDate, abstractGameState, detailedState, linescore, everything())
 
     nhl_scoreboard_dataframe <- nhl_schedule_details_games_dataframe_filtered %>%
       unnest(away, names_sep = ".") %>%
@@ -56,23 +56,25 @@ try(
       unnest(home, names_sep = ".") %>%
       unnest(home.team, names_sep = ".") %>%
       unnest(linescore, names_sep = ".") %>%
-      mutate(currentPeriodOrdinal = if_else(
-        exists("linescore.currentPeriodOrdinal") & !is.na(linescore.currentPeriodOrdinal),
-        linescore.currentPeriodOrdinal,
-        NA
-      )) %>%
-      mutate(currentPeriodTimeRemaining = if_else(
-        exists("linescore.currentPeriodTimeRemaining") & !is.na(linescore.currentPeriodTimeRemaining),
-        linescore.currentPeriodTimeRemaining,
-        NA
-      )) %>%
-      select(
-        away.team.name, away.score,
-        home.team.name, home.score,
-        gamePk, gameDate,
-        currentPeriodOrdinal,
-        currentPeriodTimeRemaining,
-      )
+      mutate(currentPeriod = ifelse("linescore.currentPeriod" %in% names(.),
+                                           linescore.currentPeriod, NA)) %>%
+      mutate(currentPeriodOrdinal = ifelse("linescore.currentPeriodOrdinal" %in% names(.),
+                                           linescore.currentPeriodOrdinal, NA)) %>%
+      mutate(currentPeriodTimeRemaining = ifelse("linescore.currentPeriodTimeRemaining" %in% names(.),
+                                           linescore.currentPeriodTimeRemaining, NA)) %>%
+      mutate(linescoreCurrentPeriodOrdinal = ifelse(exists("linescore.currentPeriodOrdinal"),
+                                              linescore.currentPeriodOrdinal, NA)) %>%
+      mutate(linescoreCurrentPeriodTimeRemaining = ifelse(exists("linescore.currentPeriodTimeRemaining"),
+                                                 linescore.currentPeriodTimeRemaining, NA)) %>%
+      select(gamePk, gameDate,
+             away.team.name, away.score,
+             home.team.name, home.score,
+             linescoreCurrentPeriodOrdinal, linescoreCurrentPeriodTimeRemaining,
+             currentPeriodOrdinal, currentPeriodTimeRemaining)
+    
+    View(nhl_scoreboard_dataframe)
+    colnames(nhl_scoreboard_dataframe)
+  
 
     # OPTIONAL: Convert our filtered data frame to JSON
     # nhl_schedule_details_games_dataframe_filtered_toJSON <- toJSON(nhl_schedule_details_games_dataframe_filtered, pretty = TRUE)
