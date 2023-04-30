@@ -62,18 +62,13 @@ try(
                                            linescore.currentPeriodOrdinal, NA)) %>%
       mutate(currentPeriodTimeRemaining = ifelse("linescore.currentPeriodTimeRemaining" %in% names(.),
                                            linescore.currentPeriodTimeRemaining, NA)) %>%
-      mutate(linescoreCurrentPeriodOrdinal = ifelse(exists("linescore.currentPeriodOrdinal"),
-                                              linescore.currentPeriodOrdinal, NA)) %>%
-      mutate(linescoreCurrentPeriodTimeRemaining = ifelse(exists("linescore.currentPeriodTimeRemaining"),
-                                                 linescore.currentPeriodTimeRemaining, NA)) %>%
       select(gamePk, gameDate,
              away.team.name, away.score,
              home.team.name, home.score,
-             linescoreCurrentPeriodOrdinal, linescoreCurrentPeriodTimeRemaining,
              currentPeriodOrdinal, currentPeriodTimeRemaining)
     
-    # View(nhl_scoreboard_dataframe)
-    # colnames(nhl_scoreboard_dataframe)
+    View(nhl_scoreboard_dataframe)
+    colnames(nhl_scoreboard_dataframe)
   
 
     # OPTIONAL: Convert our filtered data frame to JSON
