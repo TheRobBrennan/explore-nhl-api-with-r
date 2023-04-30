@@ -34,6 +34,10 @@ while (TRUE) {
     try(rm(nhl_scoreboard_dataframe), silent = TRUE)
   }
 
+  if (exists("nhl_schedule_details_games_dataframe_filtered")) {
+    try(rm(nhl_schedule_details_games_dataframe_filtered), silent = TRUE)
+  }
+  
   # Read in the source files
   source(NHL_SCOREBOARD_SCRIPT)
   source(WHL_SCOREBOARD_SCRIPT)
