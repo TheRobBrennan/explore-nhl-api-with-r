@@ -72,8 +72,8 @@ try(
              linescoreCurrentPeriodOrdinal, linescoreCurrentPeriodTimeRemaining,
              currentPeriodOrdinal, currentPeriodTimeRemaining)
     
-    View(nhl_scoreboard_dataframe)
-    colnames(nhl_scoreboard_dataframe)
+    # View(nhl_scoreboard_dataframe)
+    # colnames(nhl_scoreboard_dataframe)
   
 
     # OPTIONAL: Convert our filtered data frame to JSON
