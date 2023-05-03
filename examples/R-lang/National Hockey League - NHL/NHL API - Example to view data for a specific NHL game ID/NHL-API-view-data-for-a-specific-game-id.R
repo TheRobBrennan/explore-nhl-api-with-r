@@ -66,12 +66,16 @@ try(
       # print("Column linescore exists in the data frame")
       nhl_scoreboard_dataframe <- nhl_scoreboard_dataframe %>% 
         unnest(linescore, names_sep = ".") %>%
+        mutate(linescoreCurrentPeriodOrdinal = ifelse(exists("linescore.currentPeriodOrdinal"),
+                                                      linescore.currentPeriodOrdinal, NA)) %>%
+        mutate(linescoreCurrentPeriodTimeRemaining = ifelse(exists("linescore.currentPeriodTimeRemaining"),
+                                                            linescore.currentPeriodTimeRemaining, NA)) %>%
         select(
           gamePk, gameDate,
           away.team.name, away.score,
           home.team.name, home.score,
-          linescore.currentPeriodOrdinal,
-          linescore.currentPeriodTimeRemaining,
+          linescoreCurrentPeriodOrdinal,
+          linescoreCurrentPeriodTimeRemaining,
         )
     } else {
       # print("Column linescore does not exist in the data frame")
