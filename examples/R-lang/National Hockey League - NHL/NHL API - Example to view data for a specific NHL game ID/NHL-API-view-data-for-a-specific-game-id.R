@@ -16,7 +16,7 @@ library(tidyr)
 try(
   {
     # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-    NHL_GAME_ID <- 2022021214
+    NHL_GAME_ID <- 2022030211
 
     # Build the URL to load our live game data
     NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
@@ -48,24 +48,44 @@ try(
       select(gamePk, gameDate, status, teams, linescore) %>%
       unnest(status) %>%
       unnest(teams) %>%
-      select(gamePk, gameDate, abstractGameState, detailedState, linescore, everything())
-
+      select(gamePk, gameDate, abstractGameState, detailedState, everything())
+    
     nhl_scoreboard_dataframe <- nhl_schedule_details_games_dataframe_filtered %>%
       unnest(away, names_sep = ".") %>%
       unnest(away.team, names_sep = ".") %>%
       unnest(home, names_sep = ".") %>%
       unnest(home.team, names_sep = ".") %>%
-      unnest(linescore, names_sep = ".") %>%
-      mutate(currentPeriod = ifelse("linescore.currentPeriod" %in% names(.),
-                                           linescore.currentPeriod, NA)) %>%
-      mutate(currentPeriodOrdinal = ifelse("linescore.currentPeriodOrdinal" %in% names(.),
-                                           linescore.currentPeriodOrdinal, NA)) %>%
-      mutate(currentPeriodTimeRemaining = ifelse("linescore.currentPeriodTimeRemaining" %in% names(.),
-                                           linescore.currentPeriodTimeRemaining, NA)) %>%
-      select(gamePk, gameDate,
-             away.team.name, away.score,
-             home.team.name, home.score,
-             currentPeriodOrdinal, currentPeriodTimeRemaining)
+      select(
+        away.team.name, away.score,
+        home.team.name, home.score,
+        gamePk, gameDate,
+        linescore
+      )
+    
+    if ("linescore" %in% colnames(nhl_scoreboard_dataframe)) {
+      # print("Column linescore exists in the data frame")
+      nhl_scoreboard_dataframe <- nhl_scoreboard_dataframe %>% 
+        unnest(linescore, names_sep = ".") %>%
+        select(
+          gamePk, gameDate,
+          away.team.name, away.score,
+          home.team.name, home.score,
+          linescore.currentPeriodOrdinal,
+          linescore.currentPeriodTimeRemaining,
+        )
+    } else {
+      # print("Column linescore does not exist in the data frame")
+      nhl_scoreboard_dataframe <- nhl_scoreboard_dataframe %>%
+        mutate(currentPeriodOrdinal = 'Scheduled') %>%
+        mutate(currentPeriodTimeRemaining = 'Not started') %>%
+        select(
+          gamePk, gameDate,
+          away.team.name, away.score,
+          home.team.name, home.score,
+          currentPeriodOrdinal,
+          currentPeriodTimeRemaining,
+        )
+    }
     
     # View(nhl_scoreboard_dataframe)
     # colnames(nhl_scoreboard_dataframe)
