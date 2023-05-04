@@ -55,44 +55,27 @@ try(
       unnest(away.team, names_sep = ".") %>%
       unnest(home, names_sep = ".") %>%
       unnest(home.team, names_sep = ".") %>%
+      unnest(linescore, names_sep = ".") %>%
+      mutate(currentPeriodOrdinal = if_else(
+        exists("linescore.currentPeriodOrdinal") & !is.na(linescore.currentPeriodOrdinal),
+        linescore.currentPeriodOrdinal,
+        NA
+      )) %>%
+      mutate(currentPeriodTimeRemaining = if_else(
+        exists("linescore.currentPeriodTimeRemaining") & !is.na(linescore.currentPeriodTimeRemaining),
+        linescore.currentPeriodTimeRemaining,
+        NA
+      )) %>%
       select(
         away.team.name, away.score,
         home.team.name, home.score,
         gamePk, gameDate,
-        linescore
+        currentPeriodOrdinal,
+        currentPeriodTimeRemaining,
       )
     
-    if ("linescore" %in% colnames(nhl_scoreboard_dataframe)) {
-      # print("Column linescore exists in the data frame")
-      nhl_scoreboard_dataframe <- nhl_scoreboard_dataframe %>% 
-        unnest(linescore, names_sep = ".") %>%
-        mutate(linescoreCurrentPeriodOrdinal = ifelse(exists("linescore.currentPeriodOrdinal"),
-                                                      linescore.currentPeriodOrdinal, NA)) %>%
-        mutate(linescoreCurrentPeriodTimeRemaining = ifelse(exists("linescore.currentPeriodTimeRemaining"),
-                                                            linescore.currentPeriodTimeRemaining, NA)) %>%
-        select(
-          gamePk, gameDate,
-          away.team.name, away.score,
-          home.team.name, home.score,
-          linescoreCurrentPeriodOrdinal,
-          linescoreCurrentPeriodTimeRemaining,
-        )
-    } else {
-      # print("Column linescore does not exist in the data frame")
-      nhl_scoreboard_dataframe <- nhl_scoreboard_dataframe %>%
-        mutate(currentPeriodOrdinal = 'Scheduled') %>%
-        mutate(currentPeriodTimeRemaining = 'Not started') %>%
-        select(
-          gamePk, gameDate,
-          away.team.name, away.score,
-          home.team.name, home.score,
-          currentPeriodOrdinal,
-          currentPeriodTimeRemaining,
-        )
-    }
-    
-    # View(nhl_scoreboard_dataframe)
-    # colnames(nhl_scoreboard_dataframe)
+    View(nhl_scoreboard_dataframe)
+    colnames(nhl_scoreboard_dataframe)
   
 
     # OPTIONAL: Convert our filtered data frame to JSON
