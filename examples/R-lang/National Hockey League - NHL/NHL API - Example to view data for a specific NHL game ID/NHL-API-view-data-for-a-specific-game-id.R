@@ -4,6 +4,7 @@
 # install.packages("dplyr")    # The %>% is no longer natively supported by the R language
 # install.packages("tibble")
 # install.packages("tidyr")
+# install.packages("lubridate")
 
 # Loading packages
 library(httr)
@@ -11,6 +12,7 @@ library(jsonlite)
 library(dplyr)
 library(tibble)
 library(tidyr)
+library(lubridate)
 
 
 try(
@@ -66,8 +68,17 @@ try(
         linescore.currentPeriodTimeRemaining,
         NA
       )) %>%
+      # ymd_hms is used to convert the gameDate column in the dataframe to a date-time object
+      mutate(gameDate = ymd_hms(gameDate)) %>% # 2023-05-13 02:00:00
+      mutate(gameDateFormatted = format(
+        # with_tz is used to convert the date-time object to the local time zone - which is "America/Los_Angeles" for Seattle WA
+        with_tz(gameDate, Sys.timezone()),
+        # format is used to format the date-time object to the desired output format ("%Y-%m-%d %I:%M%p %Z") which gives the date and time in the format "YYYY-MM-DD hh:mmAM/PM Timezone"
+        # %I will display a twelve-hour time value with a leading zero. In this case, I want to use %l so we see the desired value
+        format = "%Y-%m-%d %l:%M %p %Z" # 2023-05-12  7:00 PM PDT
+      )) %>%
       select(
-        gamePk, gameDate,
+        gamePk, gameDate, gameDateFormatted,
         away.team.name, away.score,
         home.team.name, home.score,
         currentPeriodOrdinal,
