@@ -53,6 +53,16 @@ while (TRUE) {
     }
   }
 
+  if (exists("nhl_schedule_details_games_dataframe_filtered")) {
+    # Check if the data frame contains at least one row of data (fixes a bug where a day range is specified where games do NOT exist - 2023.04.07 is an example)
+    if (nrow(nhl_schedule_details_games_dataframe_filtered) > 0) {
+      print(paste(EMPTY_SPACES, "-> NHL schedule   available at", Sys.time()))
+      View(nhl_schedule_details_games_dataframe_filtered)
+    } else {
+      # print("The nhl_schedule_details_games_dataframe_filtered data frame exists, but it does not contain any data.")
+    }
+  }
+
   if (exists("nhl_scoreboard_dataframe")) {
     # Check if the data frame contains at least one row of data (fixes a bug where a day range is specified where games do NOT exist - 2023.04.07 is an example)
     if (nrow(nhl_scoreboard_dataframe) > 0) {
