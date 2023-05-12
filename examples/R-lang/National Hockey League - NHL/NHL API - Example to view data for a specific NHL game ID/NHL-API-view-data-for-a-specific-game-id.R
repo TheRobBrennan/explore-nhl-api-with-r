@@ -16,7 +16,7 @@ library(tidyr)
 try(
   {
     # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-    NHL_GAME_ID <- 2022030211
+    NHL_GAME_ID <- 2022030245
 
     # Build the URL to load our live game data
     NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
@@ -55,7 +55,7 @@ try(
       unnest(away.team, names_sep = ".") %>%
       unnest(home, names_sep = ".") %>%
       unnest(home.team, names_sep = ".") %>%
-      unnest(linescore, names_sep = ".") %>%
+      unnest(linescore, names_sep = ".", keep_empty = TRUE) %>%
       mutate(currentPeriodOrdinal = if_else(
         exists("linescore.currentPeriodOrdinal") & !is.na(linescore.currentPeriodOrdinal),
         linescore.currentPeriodOrdinal,
@@ -67,9 +67,9 @@ try(
         NA
       )) %>%
       select(
+        gamePk, gameDate,
         away.team.name, away.score,
         home.team.name, home.score,
-        gamePk, gameDate,
         currentPeriodOrdinal,
         currentPeriodTimeRemaining,
       )
