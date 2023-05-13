@@ -72,21 +72,14 @@ try(
         linescoreOriginal = linescore,
         linescoreOriginalCurrentPeriodOrdinal = linescore$currentPeriodOrdinal,
         linescoreOriginalCurrentPeriodTimeRemaining = linescore$currentPeriodTimeRemaining,
+        # 2023.05.13 Let's stick with our solution earlier today and keep the above fields for debug information
         linescore = ifelse(
           is.null(linescore), 
           NA, 
           linescore
         ),
-        currentPeriodOrdinal = ifelse(
-          is.null(linescore$currentPeriodOrdinal), 
-          NA, 
-          linescore$currentPeriodOrdinal
-        ),
-        currentPeriodTimeRemaining = ifelse(
-          is.null(linescore$currentPeriodTimeRemaining), 
-          NA, 
-          linescore$currentPeriodTimeRemaining
-        ),
+        currentPeriodOrdinal = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodOrdinal,
+        currentPeriodTimeRemaining = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodTimeRemaining,
         # ymd_hms is used to convert the gameDate column in the dataframe to a date-time object
         gameDate = ymd_hms(gameDate), # 2023-05-13 02:00:00
         gameDateFormatted = format(
@@ -101,9 +94,8 @@ try(
         gamePk, gameDate, gameDateFormatted,
         away.team.name, away.score,
         home.team.name, home.score,
-        linescoreOriginalCurrentPeriodOrdinal, linescoreOriginalCurrentPeriodTimeRemaining,
         currentPeriodOrdinal, currentPeriodTimeRemaining,
-        linescore, linescoreOriginal
+        linescoreOriginal
       )
 
     # View(nhl_scoreboard_dataframe)
