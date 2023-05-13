@@ -68,6 +68,10 @@ try(
       unnest(home, names_sep = ".") %>%
       unnest(home.team, names_sep = ".") %>%
       mutate(
+        # 2023.05.13 We're not entirely out of the woods troubleshooting linescore data that may or may not exist
+        linescoreOriginal = linescore,
+        linescoreOriginalCurrentPeriodOrdinal = linescore$currentPeriodOrdinal,
+        linescoreOriginalCurrentPeriodTimeRemaining = linescore$currentPeriodTimeRemaining,
         linescore = ifelse(
           is.null(linescore), 
           NA, 
@@ -97,8 +101,9 @@ try(
         gamePk, gameDate, gameDateFormatted,
         away.team.name, away.score,
         home.team.name, home.score,
-        currentPeriodOrdinal,
-        currentPeriodTimeRemaining
+        linescoreOriginalCurrentPeriodOrdinal, linescoreOriginalCurrentPeriodTimeRemaining,
+        currentPeriodOrdinal, currentPeriodTimeRemaining,
+        linescore, linescoreOriginal
       )
 
     # View(nhl_scoreboard_dataframe)
