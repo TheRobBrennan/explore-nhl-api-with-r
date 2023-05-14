@@ -19,7 +19,7 @@ library(purrr)
 try(
   {
     # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-    NHL_GAME_ID <- 2022030245
+    NHL_GAME_ID <- 2022030236
 
     # Build the URL to load our live game data
     NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
@@ -68,21 +68,18 @@ try(
       unnest(home, names_sep = ".") %>%
       unnest(home.team, names_sep = ".") %>%
       mutate(
+        # 2023.05.13 We're not entirely out of the woods troubleshooting linescore data that may or may not exist
+        linescoreOriginal = linescore,
+        linescoreOriginalCurrentPeriodOrdinal = linescore$currentPeriodOrdinal,
+        linescoreOriginalCurrentPeriodTimeRemaining = linescore$currentPeriodTimeRemaining,
+        # 2023.05.13 Let's stick with our solution earlier today and keep the above fields for debug information
         linescore = ifelse(
           is.null(linescore), 
           NA, 
           linescore
         ),
-        currentPeriodOrdinal = ifelse(
-          is.null(linescore$currentPeriodOrdinal), 
-          NA, 
-          linescore$currentPeriodOrdinal
-        ),
-        currentPeriodTimeRemaining = ifelse(
-          is.null(linescore$currentPeriodTimeRemaining), 
-          NA, 
-          linescore$currentPeriodTimeRemaining
-        ),
+        currentPeriodOrdinal = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodOrdinal,
+        currentPeriodTimeRemaining = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodTimeRemaining,
         # ymd_hms is used to convert the gameDate column in the dataframe to a date-time object
         gameDate = ymd_hms(gameDate), # 2023-05-13 02:00:00
         gameDateFormatted = format(
@@ -97,8 +94,8 @@ try(
         gamePk, gameDate, gameDateFormatted,
         away.team.name, away.score,
         home.team.name, home.score,
-        currentPeriodOrdinal,
-        currentPeriodTimeRemaining
+        currentPeriodOrdinal, currentPeriodTimeRemaining,
+        linescoreOriginal
       )
 
     # View(nhl_scoreboard_dataframe)
