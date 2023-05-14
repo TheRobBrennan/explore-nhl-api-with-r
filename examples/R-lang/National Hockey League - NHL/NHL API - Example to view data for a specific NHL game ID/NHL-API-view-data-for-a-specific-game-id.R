@@ -70,14 +70,23 @@ try(
       mutate(
         # 2023.05.13 We're not entirely out of the woods troubleshooting linescore data that may or may not exist
         linescoreOriginal = linescore,
-        linescoreOriginalCurrentPeriodOrdinal = linescore$currentPeriodOrdinal,
-        linescoreOriginalCurrentPeriodTimeRemaining = linescore$currentPeriodTimeRemaining,
+        linescoreOriginalCurrentPeriodOrdinal = ifelse(
+          is.null(linescore) | is.null(linescore$currentPeriodOrdinal),
+          NA,
+          linescore$currentPeriodOrdinal
+        ),
+        linescoreOriginalCurrentPeriodTimeRemaining = ifelse(
+          is.null(linescore) | is.null(linescore$currentPeriodTimeRemaining),
+          NA,
+          linescore$currentPeriodTimeRemaining
+        ),
         # 2023.05.13 Let's stick with our solution earlier today and keep the above fields for debug information
         linescore = ifelse(
           is.null(linescore), 
           NA, 
           linescore
         ),
+        # 2023.05.14 On-going work to find a way to handle linescore data that may or may not be present
         currentPeriodOrdinal = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodOrdinal,
         currentPeriodTimeRemaining = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodTimeRemaining,
         # ymd_hms is used to convert the gameDate column in the dataframe to a date-time object
