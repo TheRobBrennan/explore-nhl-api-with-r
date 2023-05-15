@@ -89,8 +89,6 @@ try(
         # 2023.05.14 On-going work to find a way to handle linescore data that may or may not be present
         currentPeriodOrdinal = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodOrdinal,
         currentPeriodTimeRemaining = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodTimeRemaining,
-        # ymd_hms is used to convert the gameDate column in the dataframe to a date-time object
-        gameDate = ymd_hms(gameDate), # 2023-05-13 02:00:00
         gameDateFormatted = format(
           # with_tz is used to convert the date-time object to the local time zone - which is "America/Los_Angeles" for Seattle WA
           with_tz(gameDate, Sys.timezone()),
