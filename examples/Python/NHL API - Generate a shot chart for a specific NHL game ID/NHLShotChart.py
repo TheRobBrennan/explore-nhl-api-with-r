@@ -51,7 +51,7 @@ NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 
 # NHL settings and configuration
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID = 2022030237
+NHL_GAME_ID = 2022030311
 
 
 def convertToLocalDateTimeString(dateTimeString):
@@ -81,7 +81,7 @@ def generate_shot_chart_for_game(gameId):
     currentPeriodTimeRemaining = result['currentPeriodTimeRemaining']
     currentPeriodOrdinal = result['currentPeriodOrdinal']
 
-    if currentPeriodOrdinal == 'OT' or currentPeriodOrdinal == 'SO':
+    if 'OT' in currentPeriodOrdinal or currentPeriodOrdinal == 'SO':
         gameStatus = currentPeriodTimeRemaining + "/" + currentPeriodOrdinal
     elif currentPeriodTimeRemaining == 'Final':
         gameStatus = currentPeriodTimeRemaining
