@@ -26,7 +26,8 @@ try(
     NHL_LIVE_GAME_URL <- sprintf("%s/game/%d/feed/live", NHL_BASE_API_URL, NHL_GAME_ID)
 
     # Build the URL to loud our NHL schedule data
-    NHL_SCHEDULE_START_DATE <- Sys.Date() # "2023-02-25"
+    # NHL_SCHEDULE_START_DATE <- Sys.Date() # "2023-02-25"
+    NHL_SCHEDULE_START_DATE <- "2023-05-18"
     NHL_SCHEDULE_END_DATE <- Sys.Date() # "2023-02-25"
     NHL_SCHEDULE_URL <- sprintf(
       "%s/schedule?startDate=%s&endDate=%s&hydrate=team,linescore,broadcasts(all),tickets,game(content(media(epg)),seriesSummary),radioBroadcasts,metadata,seriesSummary(series)&site=en_nhl&teamId=&gameType=&timecode=",

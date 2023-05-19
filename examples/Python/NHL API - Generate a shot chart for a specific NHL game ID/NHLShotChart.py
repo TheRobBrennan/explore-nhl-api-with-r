@@ -81,7 +81,7 @@ def generate_shot_chart_for_game(gameId):
     currentPeriodTimeRemaining = result['currentPeriodTimeRemaining']
     currentPeriodOrdinal = result['currentPeriodOrdinal']
 
-    if currentPeriodOrdinal == 'OT' or currentPeriodOrdinal == 'SO':
+    if 'OT' in currentPeriodOrdinal or currentPeriodOrdinal == 'SO':
         gameStatus = currentPeriodTimeRemaining + "/" + currentPeriodOrdinal
     elif currentPeriodTimeRemaining == 'Final':
         gameStatus = currentPeriodTimeRemaining
