@@ -51,7 +51,7 @@ NHL_API_DATE_TIME_FORMAT_STRING = "%Y-%m-%dT%H:%M:%SZ"  # '2023-01-20T03:00:00Z'
 
 # NHL settings and configuration
 # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-NHL_GAME_ID = 2022030321
+NHL_GAME_ID = 2022030312
 
 
 def convertToLocalDateTimeString(dateTimeString):
@@ -439,6 +439,6 @@ def parse_game_details(gameId):
 try:
     generate_shot_chart_for_game(NHL_GAME_ID)
 except:
-    print('\nWelp, that didn\'t work as expected. We are unable to generate a shot chart for the NHL_GAME_ID ' +
-          str(NHL_GAME_ID) + '. Did it start yet?\n')
+    print('\nUnable to generate a shot chart for NHL_GAME_ID ' +
+          str(NHL_GAME_ID) + '.\nExpected data is not available for processing.\n')
 # ------------------------------------------------------------------------------------------------
