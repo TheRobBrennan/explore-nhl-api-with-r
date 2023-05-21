@@ -4,7 +4,7 @@ This project will explore getting started developing with [Python](https://www.p
 
 The example Python script at [NHLShotChart.py](./NHLShotChart.py) will allow you to generate charts using a game ID from the NHL API to see where players either had a goal or a shot on goal. You can optionally enable displaying all shot attempts, as well.
 
-![](./images/shot-chart-2022030312-2023-05-20_500pm_PDT-FLA-vs-CAR.png)
+![](./images/shot-chart-2022030322-2023-05-21_1200pm_PDT-DAL-vs-VGK.png)
 
 ## Local development
 
