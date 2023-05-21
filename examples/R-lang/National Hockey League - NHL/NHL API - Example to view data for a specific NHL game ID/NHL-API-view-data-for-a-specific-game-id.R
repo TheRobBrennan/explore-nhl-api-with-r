@@ -19,7 +19,7 @@ library(purrr)
 try(
   {
     # Click on an individual game in the scorebar at https://www.nhl.com to get the game ID
-    NHL_GAME_ID <- 2022030312
+    NHL_GAME_ID <- 2022030322
 
     # Build the URL to load our live game data
     NHL_BASE_API_URL <- "https://statsapi.web.nhl.com/api/v1"
@@ -63,7 +63,7 @@ try(
         )
       ) %>%
       select(gamePk, gameDate, gameDateFormatted, everything())
-    
+
     nhl_scoreboard_dataframe <- nhl_schedule_details_games_dataframe_filtered %>%
       unnest(away, names_sep = ".") %>%
       unnest(away.team, names_sep = ".") %>%
@@ -84,8 +84,8 @@ try(
         ),
         # 2023.05.13 Let's stick with our solution earlier today and keep the above fields for debug information
         linescore = ifelse(
-          is.null(linescore), 
-          NA, 
+          is.null(linescore),
+          NA,
           linescore
         ),
         # 2023.05.14 On-going work to find a way to handle linescore data that may or may not be present
@@ -98,7 +98,7 @@ try(
           # %I will display a twelve-hour time value with a leading zero. In this case, I want to use %l so we see the desired value
           format = "%Y-%m-%d %l:%M %p %Z" # 2023-05-12  7:00 PM PDT
         )
-      ) %>% 
+      ) %>%
       select(
         gamePk, gameDate, gameDateFormatted,
         away.team.name, away.score,
@@ -109,7 +109,7 @@ try(
 
     # View(nhl_scoreboard_dataframe)
     # colnames(nhl_scoreboard_dataframe)
-  
+
     # OPTIONAL: Convert our filtered data frame to JSON
     # nhl_schedule_details_games_dataframe_filtered_toJSON <- toJSON(nhl_schedule_details_games_dataframe_filtered, pretty = TRUE)
 
