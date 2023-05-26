@@ -20,9 +20,10 @@ while true; do
     
     # Redirect the output - By redirecting the output of the Python command to a log file, you can capture any error messages or other output for future reference
     ./.venv/bin/python "examples/Python/NHL API - Generate a shot chart for a specific NHL game ID/NHLShotChart.py" >> "$log_file"
-    
-    echo "Execution count: $padded_count\tTimestamp: $timestamp"
     echo "\nExecution count: $padded_count\tTimestamp: $timestamp\n\n" >> "$log_file"
+
+    # Display the last n lines
+    tail -n 10 "$log_file"
 
     sleep 30
 done
