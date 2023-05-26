@@ -6,3 +6,6 @@
 .venv
 
 __pycache__
+
+# NHL shot chart
+shot_chart.log
