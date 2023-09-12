@@ -1,0 +1,15 @@
+{
+  "name": "explore-nhl-api-with-r-and-python",
+  "version": "0.0.0",
+  "description": "This project will explore getting started developing with the [R](https://www.r-project.org) programming language as quickly as possible using [RStudio](https://posit.co/products/open-source/rstudio/) and data from the National Hockey League (NHL) API.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheRobBrennan/explore-nhl-api-with-r-and-python.git"
+  },
+  "author": "Rob Brennan <rob@therobbrennan.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheRobBrennan/explore-nhl-api-with-r-and-python/issues"
+  },
+  "homepage": "https://github.com/TheRobBrennan/explore-nhl-api-with-r-and-python#readme"
+}
