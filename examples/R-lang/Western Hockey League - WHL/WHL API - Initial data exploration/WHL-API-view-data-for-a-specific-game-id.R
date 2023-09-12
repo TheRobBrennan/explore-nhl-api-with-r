@@ -24,11 +24,11 @@ HOCKEYTECH_VIEW_GAME_CENTER_TAB_PLAY_BY_PLAY <- "pxpverbose"
 HOCKEYTECH_VIEW_GAME_CENTER_TAB_PREVIEW <- "preview"
 
 HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR <- "scorebar"
-HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD <- 14
-HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 1
+HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_AHEAD <- 3
+HOCKEYTECH_VIEW_MODULE_KIT_SCOREBAR_NUMBER_OF_DAYS_BACK <- 5
 
 # https://whl.ca/gamecentre/{HOCKEYTECH_GAME_ID}/preview
-HOCKEYTECH_GAME_ID <- 1019281
+HOCKEYTECH_GAME_ID <- 1020236
 
 # =============================================================================
 # WHL Scorebar - https://lscluster.hockeytech.com/feed/index.php?feed=modulekit&key=41b145a848f4bd67&site_id=2&client_code=whl&lang=en&view=scorebar&numberofdaysahead=3&numberofdaysback=0&league_code=&fmt=json
