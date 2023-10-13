@@ -91,7 +91,9 @@ try(
       ) %>%
       mutate( # 2023.10.12 Use direct assignment from linescoreOriginal as the values for our current period ordinal and time remaining
         currentPeriodOrdinal = linescoreOriginal$currentPeriodOrdinal,
-        currentPeriodTimeRemaining = linescoreOriginal$currentPeriodTimeRemaining
+        currentPeriodTimeRemaining = linescoreOriginal$currentPeriodTimeRemaining,
+        awaySOG = linescoreOriginal$teams$away$shotsOnGoal,
+        homeSOG = linescoreOriginal$teams$home$shotsOnGoal,
       ) %>%
       mutate(
         gameDateFormatted = format(
@@ -103,10 +105,11 @@ try(
         )
       ) %>%
       select(
-        gamePk, gameDate, gameDateFormatted,
+        gamePk, gameDateFormatted,
         away.team.name, away.score,
         home.team.name, home.score,
         currentPeriodOrdinal, currentPeriodTimeRemaining,
+        awaySOG, homeSOG,
         linescoreOriginal
       )
   
