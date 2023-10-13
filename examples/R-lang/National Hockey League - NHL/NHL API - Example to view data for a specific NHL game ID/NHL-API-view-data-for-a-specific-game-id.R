@@ -87,10 +87,13 @@ try(
           is.null(linescore),
           NA,
           linescore
-        ),
-        # 2023.05.14 On-going work to find a way to handle linescore data that may or may not be present
-        currentPeriodOrdinal = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodOrdinal,
-        currentPeriodTimeRemaining = if (is.null(linescoreOriginal)) NA else linescoreOriginalCurrentPeriodTimeRemaining,
+        )
+      ) %>%
+      mutate( # 2023.10.12 Use direct assignment from linescoreOriginal as the values for our current period ordinal and time remaining
+        currentPeriodOrdinal = linescoreOriginal$currentPeriodOrdinal,
+        currentPeriodTimeRemaining = linescoreOriginal$currentPeriodTimeRemaining
+      ) %>%
+      mutate(
         gameDateFormatted = format(
           # with_tz is used to convert the date-time object to the local time zone - which is "America/Los_Angeles" for Seattle WA
           with_tz(gameDateYMDHMS, Sys.timezone()),
@@ -106,7 +109,7 @@ try(
         currentPeriodOrdinal, currentPeriodTimeRemaining,
         linescoreOriginal
       )
-
+  
     # View(nhl_scoreboard_dataframe)
     # colnames(nhl_scoreboard_dataframe)
 
